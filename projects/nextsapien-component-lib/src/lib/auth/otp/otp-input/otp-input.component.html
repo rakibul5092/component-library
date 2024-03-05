@@ -1,0 +1,17 @@
+<strong *ngIf="placeholder">{{ placeholder }}</strong>
+<input
+  #input
+  *ngFor="let digit of digitCount; let i = index"
+  [attr.data-input-index]="i"
+  [attr.invalid-box-shadow]="invalidBoxShadow"
+  (keyup)="updateValues($event, i)"
+  [disabled]="i > 0 && values[i] === undefined"
+  [ngClass]="{ inputted: values[i] !== undefined }"
+  (click)="onClick($event)"
+  [autoFocus]="i === 0 && !touched"
+  required
+  inputmode="numeric"
+/>
+<div *ngIf="invalidBoxShadow" class="otp-box-shadows">
+  <div *ngFor="let div of digitCount"></div>
+</div>

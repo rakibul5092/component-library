@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h2>{{ 'LIB.AUTH.LOG_IN' | translate }}</h2>
+      <mat-error *ngIf="loginInvalid">
+        {{ 'LIB.AUTH.UNAME_PWORD_NOT_RECOGNISED' | translate }}
+      </mat-error>
+      <mat-error *ngIf="isUserDeleted">
+        {{ 'SNACKBAR.USER_SOFT_DELELTED' | translate }}
+      </mat-error>
+      <mat-form-field class="full-width-input">
+        <input id="email" matInput placeholder="{{ 'LIB.AUTH.EMAIL' | translate }}" formControlName="email" required type="email" />
+        <mat-error>
+          {{ 'LIB.AUTH.PROVIDE_VALID_EMAIL' | translate }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input id="password" matInput [type]="isPassword ? 'password' : 'text'" placeholder="{{ 'LIB.AUTH.PASSWORD' | translate }}" formControlName="password" required />
+        <mat-error>
+          {{ 'LIB.AUTH.PROVIDE_VALID_PASSWORD' | translate }}
+        </mat-error>
+
+        <button matSuffix mat-icon-button color="primary" (click)="togglePassword($event)" type="button">
+          <mat-icon>{{ isPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">{{ 'LIB.AUTH.LOGIN' | translate }}</button>
+    </form>
+  </mat-card-content>
+  <mat-card-footer>
+    <p class="">
+      {{ 'LIB.AUTH.FORGOT_PASSWORD' | translate }}? <a [routerLink]="['/auth', 'forgot_password']">{{ 'LIB.AUTH.CLICK_RESET_PASSWORD' | translate }}</a>
+    </p>
+  </mat-card-footer>
+</mat-card>

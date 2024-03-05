@@ -1,0 +1,61 @@
+<div class="iti iti--allow-dropdown phone-input" [ngClass]="separateDialCodeClass">
+  <div class="iti__flag-container" dropdown container="body" (onShown)="focusInputElement(); onResize(focusable.getBoundingClientRect().width); focusSelectedCountry()" [ngClass]="{ disabled }" [isDisabled]="disabled">
+    <div class="iti__selected-flag dropdown-toggle" matRipple dropdownToggle>
+      <div class="iti__flag" *ngIf="searchCountryFlag" [ngClass]="selectedCountry.flagClass || ''"></div>
+      <div *ngIf="separateDialCode || (!searchCountryFlag && !separateDialCode)" class="selected-dial-code">+{{ selectedCountry.dialCode }}</div>
+      <div class="iti__arrow" *ngIf="showDropDownArrow"></div>
+    </div>
+    <div *dropdownMenu  #dropDownElementRef [attr.width]="focusable.getBoundingClientRect().width" class="dropdown-menu country-dropdown">
+      <div class="width-container">
+        <div class="search-container" *ngIf="searchCountryField">
+          <input
+            #inputElement
+            id="country-search-box"
+            autocomplete="off"
+            [(ngModel)]="countrySearchText"
+            (keyup)="searchCountry()"
+            (click)="$event.stopPropagation()"
+            [placeholder]="searchCountryPlaceholder"
+            autofocus
+          />
+        </div>
+        <ul class="iti__country-list" #countryList>
+          <li
+            class="iti__country iti__standard"
+            [class.selected]="selectedCountry?.name === country.name"
+            *ngFor="let country of filteredCountries; trackBy: identify"
+            (click)="onCountrySelect(country, focusable);"
+            [id]="country.htmlId"
+          >
+            <div class="iti__flag-box">
+              <div class="iti__flag" [ngClass]="country.flagClass"></div>
+            </div>
+            <span class="iti__country-name">{{ country.name }}</span>
+            <span class="iti__dial-code">+{{ country.dialCode }}</span>
+          </li>
+          <li *ngIf="!filteredCountries.length" class="iti__country iti__standard disabled">
+            <span class="iti__country-name">No Country found</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <input
+    (resized)="onResize($event.newRect.inlineSize)"
+    type="tel"
+    [id]="inputId"
+    [mask]="maskPhoneNumber ? phoneMask : ''"
+    [showMaskTyped]="eagerMask"
+    autocomplete="off"
+    [ngClass]="cssClass"
+    (blur)="onTouched()"
+    (keypress)="onInputKeyPress($event)"
+    [(ngModel)]="phoneNumber"
+    (ngModelChange)="onPhoneNumberChange()"
+    [disabled]="disabled"
+    [placeholder]="resolvePlaceholder()"
+    [attr.maxLength]="maxLength"
+    [attr.validation]="phoneValidation"
+    #focusable
+  />
+</div>

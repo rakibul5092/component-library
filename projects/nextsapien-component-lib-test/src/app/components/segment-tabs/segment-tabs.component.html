@@ -1,0 +1,53 @@
+<div class="showcase-container">
+  <table>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Data type</th>
+      <th>Required</th>
+      <th>Default</th>
+      <th>Demo</th>
+    </tr>
+    <tr>
+      <td>ion-segment</td>
+      <td>Non scrollable segment tab</td>
+      <td>Demo of non-scrollable ion-segment global style</td>
+      <td>scrollable: boolean</td>
+      <td>true</td>
+      <td></td>
+      <td class="last-td">
+        <!-- Non Scrollable -->
+        <!-- <ion-segment mode="md" scrollable="false" [(ngModel)]="selectedTab1">
+          <ion-segment-button *ngFor="let segment of tabs1" [value]="segment">
+            <ion-label [class]="
+                  'text f-calistoga f-w-400 f-xl ' +
+                  (selectedTab1 === segment ? 'f-white' : 'f-dark ')
+                ">{{ segment }}
+            </ion-label>
+          </ion-segment-button>
+        </ion-segment> -->
+      </td>
+    </tr>
+    <tr>
+      <td>ion-segment</td>
+      <td>Scrollable segment tab</td>
+      <td>Demo of scrollable ion-segment global style</td>
+      <td>scrollable: boolean</td>
+      <td>true</td>
+      <td></td>
+      <td class="last-td">
+        <!-- Scrollable -->
+        <!-- <ion-segment mode="md" scrollable="true" [(ngModel)]="selectedTab2">
+          <ion-segment-button *ngFor="let segment of tabs2" [value]="segment">
+            <ion-label [class]="
+                  'text ' +
+                  (selectedTab2 === segment ? 'f-calistoga f-w-400 f-lg h-160 f-white' : 'f-lato f-w-600 f-md h-160 f-dark ')
+                ">{{ segment }}
+            </ion-label>
+          </ion-segment-button>
+        </ion-segment> -->
+      </td>
+    </tr>
+  </table>
+</div>

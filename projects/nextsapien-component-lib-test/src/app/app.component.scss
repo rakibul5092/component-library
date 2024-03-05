@@ -1,0 +1,38 @@
+@import '../styles/colors';
+
+:host {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  flex: 0 0 55px;
+  flex-direction: row;
+  width: 100vw;
+  border-bottom: 1px solid $ns-neutral-6;
+
+  &__logo {
+    flex: 0 0 auto;
+    height: 50px;
+    padding: 0 0 5px 15px;
+  }
+
+  &__text {
+    flex: 1 1 auto;
+    font-size: 25px;
+    padding-top: 12px;
+    text-align: center;
+    font-weight: bold;
+    color: $ns-grey-900;
+  }
+}
+
+.main-area {
+  display: flex;
+  flex: 1 1 auto;
+  overflow: hidden;
+  // background: var(--primary-background);
+}

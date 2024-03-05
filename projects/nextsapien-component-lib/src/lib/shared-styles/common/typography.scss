@@ -1,0 +1,106 @@
+/* Text styles */
+.f-lato {
+  font-family: 'Lato';
+  font-style: normal;
+}
+
+.f-calistoga {
+  font-family: 'Calistoga';
+  font-style: normal;
+}
+
+.f-roboto {
+  font-family: 'Roboto';
+  font-style: normal;
+}
+
+.f-inter {
+  font-family: 'Inter';
+  font-style: normal;
+}
+
+/* font sizes */
+.f-3xl {
+  font-size: 28px;
+}
+
+.f-2xl {
+  font-size: 24px;
+}
+
+.f-xl {
+  font-size: 18px;
+}
+
+.f-lg {
+  font-size: 16px;
+}
+
+.f-md {
+  font-size: 14px;
+}
+
+.f-sm {
+  font-size: 12px;
+}
+
+.f-xs {
+  font-size: 10px;
+}
+
+/* colors */
+.f-white {
+  color: var(--ion-text-color);
+}
+
+.f-dark {
+  color: var(--ion-text-color-secondary);
+}
+
+.f-gray {
+  color: var(--ion-text-color);
+  opacity: 0.6;
+}
+
+.f-light-gray {
+  color: var(--ion-text-color);
+  opacity: 0.7;
+}
+
+.f-accent {
+  color: var(--text-highlight-color);
+}
+
+/* Font heights */
+.h-160 {
+  line-height: 160%;
+}
+
+.h-100 {
+  line-height: 100%;
+}
+
+.h-150 {
+  line-height: 150%;
+}
+
+.h-180 {
+  line-height: 180%;
+}
+
+/* font weights */
+.f-w-400 {
+  font-weight: 400;
+}
+
+.f-w-500 {
+  font-weight: 500;
+}
+
+.f-w-600 {
+  font-weight: 600;
+}
+
+.f-w-700 {
+  font-weight: 700;
+}

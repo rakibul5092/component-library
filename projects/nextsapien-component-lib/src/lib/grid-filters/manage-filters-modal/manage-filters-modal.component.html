@@ -1,0 +1,28 @@
+<div class="filter-dialog">
+  <div class="filter-dialog__header" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <div class="filter-dialog__header-left-group">
+      <div class="filter-dialog__header-text">Manage Filters</div>
+    </div>
+    <i class="filter-dialog__header-close-button icon-close" (click)="handleClose()"></i>
+  </div>
+
+  <div class="filter-dialog__body" cdkDropList (cdkDropListDropped)="drop($event)">
+    <div class="filter-dialog__row" *ngFor="let filter of userFiltersList" cdkDrag>
+      <div class="filter-dialog__placeholder" *cdkDragPlaceholder></div>
+      <div class="filter-dialog__row-title">
+        <i class="filter-dialog__row-icon icon-gen3-ellipsis-vertical"></i>
+        <i class="filter-dialog__row-icon icon-gen3-ellipsis-vertical"></i>
+        {{ filter?.Name }}
+      </div>
+      <div class="filter-dialog__action">
+        <div class="filter-dialog__action-apply" cosTooltip="Apply" (click)="handleApplyFilter(filter)">Apply</div>
+        <i class="filter-dialog__action-icon icon-pencil" cosTooltip="Edit" (click)="handleEditFilter(filter)"> </i>
+        <i class="filter-dialog__action-icon icon-trash" cosTooltip="Delete" (click)="handleDeleteFilter(filter)"> </i>
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-dialog__footer">
+    <div class="filter-dialog__save-button" (click)="handleClose()">Close</div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+}
+
+table {
+  max-width: 800px;
+}
+
+.grid-container {
+  max-width: calc(100% - 10px);
+}
+
+lib-grid {
+  height: 70vh;
+  width: 100%;
+}

@@ -1,0 +1,59 @@
+:host {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.cyrano,
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.test-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.cyrano {
+  background: #27242c;
+  padding: 20px;
+  .title {
+    color: white;
+  }
+}
+.cyrano > app-otp-input {
+  --gap: 8.43px;
+  --width: 61.42px !important;
+  --height: 73.46px;
+  --border-radius: 24px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  --padding-left: unset;
+  --padding-right: unset;
+  --font-size: 24px;
+  --font-weight: 400;
+  --box-shadow: var(--input-box-shadow);
+  --border-bottom: unset;
+  --border-bottom-disabled: unset;
+  --invalid-box-shadow: inset 0 0 10px 0 #fe3c72;
+  margin-bottom: 15px;
+  --color: white;
+  --margin: unset;
+}
+
+.batcoin {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 30px;
+  justify-content: center;
+  align-items: center;
+}

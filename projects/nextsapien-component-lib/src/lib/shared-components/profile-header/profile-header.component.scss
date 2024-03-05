@@ -1,0 +1,103 @@
+:host {
+  --background: transparent;
+  --text-color: white;
+  --image-width: 90px;
+  --image-height: 90px;
+}
+.profile {
+  background: var(--background);
+  &-vertical {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-horizontal {
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+  }
+
+  &-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-vertical {
+      border-radius: 50%;
+      width: var(--image-width);
+      height: var(--image-height);
+      min-width: var(--image-width) !important;
+      margin-bottom: 12px;
+    }
+
+    &-horizontal {
+      border-radius: 50%;
+      width: var(--image-width);
+      height: var(--image-height);
+      min-width: var(--image-width) !important;
+      margin-right: 20px;
+    }
+  }
+
+  &-bottom-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    .name {
+      &-vertical {
+        margin-bottom: 2.5px;
+        text-align: center;
+        font-size: 24px;
+        color: var(--text-color);
+      }
+
+      &-horizontal {
+        margin-bottom: 2.5px;
+        text-align: left;
+        font-size: 18px;
+        color: var(--text-color);
+      }
+    }
+
+    .p-icon-text {
+      display: flex;
+      flex-wrap: wrap;
+
+      &-vertical {
+        justify-content: center;
+      }
+
+      &-horizontal {
+        justify-content: flex-start;
+      }
+
+      .icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+
+        ion-icon {
+          width: 9.28px;
+          height: 9.29px;
+          margin-right: 4.86px;
+          margin-top: 5px;
+        }
+
+        span {
+          opacity: 0.6;
+          color: var(--text-color);
+        }
+
+        &-horizontal {
+          margin-right: 12px;
+        }
+
+        &-vertical {
+          margin-right: 17px;
+        }
+      }
+    }
+  }
+}

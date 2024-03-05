@@ -1,0 +1,32 @@
+<div class="detail">
+  <div class="intro">Grid</div>
+  <div>
+    <select [(ngModel)]="selectedCurrencyCode">
+      <option *ngFor="let code of demoCountryCodes" [value]="code" [selected]="code">{{ code }}</option>
+    </select>
+  </div>
+  <div class="detail-section table">
+    <div class="detail-section">
+      <div class="header">Demo</div>
+      <div class="grid-container">
+        <lib-grid
+          [columns]="columns"
+          [data]="data"
+          [rowsPerPage]="rowsPerPage"
+          [rowsPerPageOptions]="rowsPerPageOptions"
+          [sortField]="sortField"
+          [sortOrder]="sortOrder"
+          [isLoading]="isLoading"
+          [totalRecords]="totalRecords"
+          [paginatorDataTypeLabel]="'Things'"
+          [groupByField]="groupByField"
+          [filterDefinitions]="filterDefinitions"
+          [userFiltersList]="userFiltersList"
+          [currencyDisplayCode]="selectedCurrencyCode"
+          [dateFormat]="dateFormat"
+          (lazyLoad)="onLazyLoad($event)"
+        ></lib-grid>
+      </div>
+    </div>
+  </div>
+</div>

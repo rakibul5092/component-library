@@ -1,0 +1,40 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title
+      ><h2>{{ 'LIB.AUTH.MFA.AUTHENTICATION_REQUIRED' | translate }}</h2></ion-card-title
+    >
+    <ion-card-subtitle>
+      {{ 'LIB.AUTH.MFA.PROTECT_YOUR_ACCOUNT' | translate }} <strong>{{ email }}</strong>
+    </ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-row>
+      <ion-col>
+        <form [formGroup]="form" (ngSubmit)="request2fa(form)" id="otp-form">
+          <app-otp-input formControlName="otp" [length]="6"></app-otp-input>
+        </form>
+        <p class="code-expiration">
+          {{ 'LIB.AUTH.MFA.CODE_EXPIRES_IN' | translate }}: &nbsp;&nbsp;
+          <span [ngClass]="{ 'still-time': timeout.mins >= 1, 'almost-timeout': timeout.mins < 1 }">
+            <strong>{{ timeout.mins < 10 ? '0' + timeout.mins : timeout.mins }}mins</strong>
+            &nbsp;
+            <strong>{{ timeout.secs < 10 ? '0' + timeout.secs : timeout.secs }}secs</strong>
+          </span>
+        </p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="base">
+      <ion-col>
+        <p>
+          {{ 'LIB.AUTH.MFA.RETRIEVE_CODE_MESSAGE' | translate }} <br />
+          {{ 'LIB.AUTH.MFA.HAVE_NOT_RECIEVED_CODE' | translate }}?
+          <button class="btn-resend-code" [disabled]="sending" (click)="resendOTP()">{{ 'LIB.AUTH.MFA.RESEND_CODE' | translate }}</button>
+        </p>
+      </ion-col>
+      <button type="submit" form="otp-form">
+        <ion-button>{{ 'LIB.AUTH.MFA.SUBMIT' | translate }}</ion-button>
+      </button>
+    </ion-row>
+  </ion-card-content>
+</ion-card>

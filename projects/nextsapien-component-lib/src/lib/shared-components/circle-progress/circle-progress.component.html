@@ -1,0 +1,57 @@
+<div [class]="imageUrl ? 'circle circle-img' : 'circle circle-text'">
+  <div *ngIf="!imageUrl; else img" class="text-container">
+    <span class="percent f-calistoga f-w-400 f-xl h-160">{{ prefix + value }}</span>
+    <span class="bottom-text f-lato f-w-400 f-xs h-100">{{ type }}</span>
+  </div>
+  <ng-template #img>
+    <img [src]="imageUrl" />
+  </ng-template>
+</div>
+<svg id="svg18" fill="none" version="1.1" viewBox="0 0 210 210" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs id="defs14">
+    <filter id="blurred-stroke">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+    </filter>
+    <radialGradient id="main-stroke-gradient" cx="100" cy="100" r="100" gradientTransform="matrix(1.2966 0 0 1.3051 -29.661 -30.508)" gradientUnits="userSpaceOnUse">
+      <stop id="stop2" stop-color="#fff" offset="0" />
+      <stop id="stop837" stop-color="#f1466a" offset=".70997" />
+      <stop id="stop839" stop-color="#f79baf" offset=".77833" />
+      <stop id="stop4" stop-color="#fff" offset="1" />
+    </radialGradient>
+  </defs>
+
+  <circle shape-rendering="auto" cx="109" cy="109" r="91" stroke-width="18" stroke="#0C0B0E" />
+  <path
+    shape-rendering="auto"
+    id="blurred-stroke"
+    d="m33.541 159.88c-10.11-15.07-15.416-34.654-15.541-50.879 0-50.258 40.742-91 91-91 50.258 0 91 40.742 91 91-0.79493 19.307-5.6375 36.103-15.541 50.879"
+    fill="none"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="18"
+    stroke="#FE3C72"
+    filter="blur(6px)"
+    opacity="0.5"
+  />
+  <path
+    shape-rendering="auto"
+    id="blurred-stroke"
+    d="m33.541 159.88c-10.11-15.07-15.416-34.654-15.541-50.879 0-50.258 40.742-91 91-91 50.258 0 91 40.742 91 91-0.79493 19.307-5.6375 36.103-15.541 50.879"
+    fill="none"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="18"
+    stroke="#792e45"
+  />
+  <path
+    id="path827"
+    d="m33.541 159.88c-10.11-15.07-15.416-34.654-15.541-50.879 0-50.258 40.742-91 91-91 50.258 0 91 40.742 91 91-0.79493 19.307-5.6375 36.103-15.541 50.879"
+    fill="none"
+    stroke="#FE3C72"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="18"
+    stroke-dasharray="393.72802734375"
+    [attr.stroke-dashoffset]="calcValue()"
+  />
+</svg>

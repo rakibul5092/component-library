@@ -1,0 +1,21 @@
+<div class="item-list">
+  <div class="item-list__header">Components</div>
+  <div *ngFor="let item of componentItems" class="item-list__item" (click)="onNavigate(item.route)">
+    {{ item.text }}
+  </div>
+
+  <div class="item-list__header">Directives</div>
+  <div *ngFor="let item of directiveItems" class="item-list__item" (click)="onNavigate(item.route)">
+    {{ item.text }}
+  </div>
+
+  <div class="item-list__header">Models</div>
+  <div *ngFor="let item of modelItems" class="item-list__item" (click)="onNavigate(item.route)">
+    {{ item.text }}
+  </div>
+
+  <div class="item-list__header">Styling</div>
+  <div *ngFor="let item of styleItems" class="item-list__item" (click)="onNavigate(item.route)">
+    {{ item.text }}
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="test-container">
+  <div class="cyrano">
+    <div class="title">OTP component (Cyrano style)</div>
+    <app-otp-input [formControl]="code1" [invalidBoxShadow]="true" [length]="5"></app-otp-input>
+    <button (click)="clearControl()">clearInput</button>
+  </div>
+
+  <div class="batcoin">
+    <div class="title">OTP component (Batcoin style)</div>
+    <app-otp-input [formControl]="code2" [invalidBoxShadow]="false" [length]="6"></app-otp-input>
+    <button (click)="clearControl()">clearInput</button>
+  </div>
+</div>

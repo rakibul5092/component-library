@@ -1,0 +1,15 @@
+<mat-form-field class="address-field">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    type="text"
+    role="presentation"
+    autocomplete="off"
+    matInput
+    id="autocomplete"
+    placeholder=""
+    ngx-google-places-autocomplete
+    [(ngModel)]="inputValue"
+    (onAddressChange)="handleAddressChange($event)"
+    #placesRef="ngx-places"
+  />
+</mat-form-field>

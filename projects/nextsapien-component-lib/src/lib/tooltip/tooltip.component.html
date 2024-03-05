@@ -1,0 +1,3 @@
+<div *ngIf="!!message" class="tooltip" [ngClass]="{ 'tooltip--reversed': directionPreference === directionPreferences.Top }">
+  <div class="tooltip__message" [innerHTML]="message"></div>
+</div>

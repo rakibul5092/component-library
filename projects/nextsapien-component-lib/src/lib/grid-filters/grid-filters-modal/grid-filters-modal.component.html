@@ -1,0 +1,157 @@
+<div class="filter-dialog">
+  <div class="filter-dialog__header" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <div class="filter-dialog__header-left-group">
+      <div class="filter-dialog__header-text">{{ mode === 'edit' ? 'Edit' : '' }} Filter</div>
+    </div>
+    <div class="filter-dialog__header-clear-all" [ngClass]="{ 'filter-dialog__header-clear-all--disabled': !enableClearAll }" (click)="handleClearAll()">Clear all</div>
+    <i class="filter-dialog__header-close-button icon-close" (click)="handleClickCancel()"></i>
+  </div>
+
+  <div class="filter-dialog__body">
+    <form [formGroup]="formGroup">
+      <div class="filter-dialog__body-filter-name">
+        <lib-form-field
+          [formFieldControl]="formGroup.controls['Name']"
+          [required]="formGroup.controls['SaveFilter'].value"
+          [submitted]="formGroup.controls['SaveFilter'].value"
+          [invalidPatternMessage]="invalidPatternMessage"
+          placeholder="Enter in a name"
+          type="text"
+          class="filter-dialog__body-field"
+        >
+        </lib-form-field>
+        <lib-form-field
+          *ngIf="mode === 'create'"
+          [formFieldControl]="formGroup.controls['SaveFilter']"
+          [type]="'checkbox'"
+          [label]="'Save Filter'"
+          class="filter-dialog__body-field--save"
+        >
+        </lib-form-field>
+      </div>
+      <div class="filter-dialog__separator"></div>
+      <div formArrayName="UserFilters">
+        <ng-container *ngFor="let filter of UserFiltersFormControl['controls']; let rowIndex = index">
+          <div class="filter-dialog__row--prefix" *ngIf="rowIndex !== 0">and</div>
+          <div
+            [formGroupName]="rowIndex"
+            [ngClass]="{
+              extended:
+                filter?.controls.PublicFieldName?.value?.value &&
+                filter?.controls?.OperatorType?.value?.value &&
+                values[filter?.controls.PublicFieldName?.value?.identifier][filter?.controls.OperatorType?.value?.identifier][0]?.length > 0
+            }"
+            class="filter-dialog__row"
+          >
+            <lib-select-filter
+              [formFieldControl]="filter?.controls.PublicFieldName"
+              [options]="options"
+              [submitted]="submitted"
+              placeholder="Select field"
+              class="filter-dialog__row-select-filter"
+            >
+            </lib-select-filter>
+            <lib-select-filter
+              [formFieldControl]="filter?.controls?.OperatorType"
+              [disabled]="!filter?.controls.PublicFieldName?.value"
+              [options]="operators[filter?.controls.PublicFieldName?.value?.identifier]"
+              [submitted]="submitted"
+              placeholder="Select condition"
+              class="filter-dialog__row-select-filter"
+            >
+            </lib-select-filter>
+            <ng-container formArrayName="Values" *ngFor="let valuefilter of filter.get('Values')['controls']; let i = index">
+              <ng-container
+                [formGroupName]="i"
+                *ngIf="
+                  filter?.controls.PublicFieldName?.value &&
+                  filter?.controls?.OperatorType?.value &&
+                  filter?.controls.PublicFieldName?.value?.identifier > -1 &&
+                  filter?.controls.OperatorType?.value?.identifier > -1 &&
+                  values[filter?.controls.PublicFieldName?.value?.identifier][filter?.controls.OperatorType?.value?.identifier][i]?.length > 0
+                "
+              >
+                <lib-select-filter
+                  *ngIf="
+                    values[filter?.controls.PublicFieldName?.value.identifier][filter?.controls.OperatorType?.value.identifier][i][0].identifier === FilterTypeEnum.MultiSelect ||
+                    values[filter?.controls.PublicFieldName?.value.identifier][filter?.controls.OperatorType?.value.identifier][i][0].identifier === FilterTypeEnum.SingleSelect
+                  "
+                  [formFieldControl]="valuefilter"
+                  [disabled]="filter?.controls.OperatorType?.value?.value < 0"
+                  [options]="values[filter?.controls.PublicFieldName?.value.identifier][filter?.controls.OperatorType?.value.identifier][i]"
+                  [operator]="values[filter?.controls.PublicFieldName?.value.identifier][filter?.controls.OperatorType?.value.identifier][i][0].identifier2"
+                  [multiple]="
+                    values[filter?.controls.PublicFieldName?.value.identifier][filter?.controls.OperatorType?.value.identifier][i][0].identifier === FilterTypeEnum.MultiSelect
+                  "
+                  [showSelectMessage]="true"
+                  [submitted]="submitted"
+                  placeholder="Select option"
+                  class="filter-dialog__row-select-filter"
+                >
+                </lib-select-filter>
+                <lib-select-filter
+                  *ngIf="
+                    values[filter?.controls.PublicFieldName?.value.identifier][filter?.controls.OperatorType?.value.identifier][i][0].identifier ===
+                    FilterTypeEnum.AutoCompleteMulti
+                  "
+                  [formFieldControl]="valuefilter"
+                  [disabled]="filter?.controls.OperatorType?.value?.value < 0"
+                  [options]="values[filter?.controls.PublicFieldName?.value.identifier][filter?.controls.OperatorType?.value.identifier][i]"
+                  [operator]="values[filter?.controls.PublicFieldName?.value.identifier][filter?.controls.OperatorType?.value.identifier][i][0].identifier2"
+                  [multiple]="true"
+                  [showSelectMessage]="true"
+                  [submitted]="submitted"
+                  [backendQueryUrl]="values[filter?.controls.PublicFieldName?.value.identifier][filter?.controls.OperatorType?.value.identifier][i][0].backendQueryUrl"
+                  [getFiltersOptions]="getFiltersOptions"
+                  placeholder="Select option"
+                  class="filter-dialog__row-select-filter"
+                >
+                </lib-select-filter>
+                <lib-date-filter
+                  *ngIf="values[filter?.controls.PublicFieldName?.value.identifier][filter?.controls.OperatorType?.value.identifier][i][0].identifier === FilterTypeEnum.DateFilter"
+                  [formFieldControl]="valuefilter"
+                  [rangeSelect]="filter?.controls.OperatorType?.value?.value === 'Between'"
+                  [dateFormat]="dateFormat"
+                  placeholder="Select date"
+                  class="filter-dialog__row-select-filter"
+                >
+                </lib-date-filter>
+                <lib-form-field
+                  *ngIf="values[filter?.controls.PublicFieldName?.value.identifier][filter?.controls.OperatorType?.value.identifier][i][0].identifier === FilterTypeEnum.Currency"
+                  [formFieldControl]="valuefilter"
+                  [currencySymbol]="currencyDisplaySymbol"
+                  [hideCents]="true"
+                  [ngClass]="{ 'filter-dialog__row-select-filter--multiple': filter?.controls.OperatorType?.value?.value === 'Between' }"
+                  type="currency"
+                  class="filter-dialog__row-select-filter"
+                >
+                </lib-form-field>
+              </ng-container>
+            </ng-container>
+            <div (click)="handleRowDeleted(rowIndex, $event)" class="filter-dialog__row--suffix">
+              <i class="icon-close" cosTooltip="Delete"></i>
+            </div>
+          </div>
+        </ng-container>
+        <div (click)="addUserFilter()" class="filter-dialog__row-add-button">
+          <i class="icon-gen3-create"></i>
+          <div class="filter-dialog__row-add-text">Add Filter</div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="filter-dialog__footer">
+    <div class="filter-dialog__cancel-button" (click)="handleClickCancel()">Cancel</div>
+    <div
+      class="filter-dialog__save-button"
+      [ngClass]="{ 'filter-dialog__save-button--disabled': !formGroup.valid || !formGroupValueChanged }"
+      *ngIf="mode === 'edit'"
+      (click)="handleClickSaveApply()"
+    >
+      Save & Apply
+    </div>
+    <div class="filter-dialog__save-button" (click)="handleClickSave()" [ngClass]="{ 'filter-dialog__save-button--disabled': !formGroup.valid || !formGroupValueChanged }">
+      {{ applyFilterText }}
+    </div>
+  </div>
+</div>

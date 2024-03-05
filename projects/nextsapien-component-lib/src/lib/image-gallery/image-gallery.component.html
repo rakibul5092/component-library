@@ -1,0 +1,7 @@
+<div class="overview-container grid" *ngIf="images">
+  <ng-template ngFor let-image [ngForOf]="images" let-i="index">
+    <div class="personal-link" *ngIf="!image.deleted">
+      <app-image [image]="image" [imageIndex]="i" (imageAction)="handelImageAction($event)"> </app-image>
+    </div>
+  </ng-template>
+</div>

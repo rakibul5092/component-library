@@ -1,0 +1,101 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  --gap: 15px;
+  gap: var(--gap);
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  --padding-left: none;
+  --padding-right: none;
+  --color: black;
+  --margin: 0px;
+  --font-size: 1.5rem;
+  --font-weight: bold;
+  --border-radius: none;
+  --box-shadow: none;
+  --width: 3rem;
+  --height: none;
+  height: var(--height);
+  --invalid-border-bottom-color: red;
+  --border-bottom: 2px solid #1e2023;
+  --border-bottom-disabled: 2px solid #000;
+  --invalid-box-shadow: none;
+  position: relative;
+}
+
+strong {
+  width: 100%;
+}
+
+.otp-box-shadows {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: var(--gap);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.otp-box-shadows > div {
+  width: var(--width);
+  height: var(--height);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+}
+
+input,
+input:focus,
+input:hover {
+  width: var(--width);
+  height: var(--height);
+  padding: var(--padding-top);
+  padding-right: var(--padding-right);
+  padding-bottom: var(--padding-bottom);
+  padding-left: var(--padding-left);
+  font-size: var(--font-size);
+  border: none;
+  outline: none;
+  margin: var(--margin);
+  text-align: center;
+  border-bottom: var(--border-bottom);
+  font-weight: var(--font-weight);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  z-index: 2;
+  color: var(--color);
+}
+
+input:focus {
+  &[invalid-box-shadow='true'] {
+    box-shadow: var(--invalid-box-shadow);
+  }
+}
+
+input[disabled],
+input.inputted:invalid {
+  opacity: 1;
+  background: transparent;
+  border-bottom: var(--border-bottom-disabled);
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-inner-outer-spin-button {
+  appearance: none;
+  margin: 0;
+  -moz-appearance: textfield;
+}
+
+:host.ng-touched.ng-invalid input:invalid {
+  &[invalid-box-shadow='true'] {
+    box-shadow: var(--invalid-box-shadow);
+  }
+  &[invalid-box-shadow='false'] {
+    border-bottom-color: var(--invalid-border-bottom-color);
+  }
+}

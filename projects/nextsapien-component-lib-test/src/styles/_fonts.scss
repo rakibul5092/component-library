@@ -1,0 +1,78 @@
+@import './colors';
+
+.info-header-bold {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: $ns-grey-900;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.info-detail-grey {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: $ns-grey-800;
+  font-size: 13px;
+}
+
+.button-text-white {
+  color: white;
+  font-size: 14px;
+}
+
+.page-header-title {
+  color: $ns-grey-900;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.menu-text-blue {
+  color: $ns-teal;
+  font-size: 14px;
+}
+
+.panel-header-title {
+  color: $ns-dark-blue-800;
+  font-weight: bold;
+  font-size: 14px;
+  align-items: center;
+}
+
+.search-input-text {
+  font-size: 14px;
+}
+
+.search-results-background-text {
+  color: $ns-grey-800;
+  font-size: 18px;
+}
+
+.dropdown-option {
+  color: $ns-grey-900;
+  font-size: 14px;
+}
+
+.dropdown-title {
+  font-size: 14px;
+  color: $ns-grey-800;
+}
+
+.confirmation-banner {
+  font-size: 14px;
+  color: white;
+}
+
+.dropdown-user {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: $ns-grey-900;
+  font-size: 14px;
+}
+
+.item-card-info {
+  color: $ns-grey-900;
+  font-size: 13px;
+}

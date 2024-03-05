@@ -1,0 +1,98 @@
+<form [formGroup]="addressForm">
+  <ion-row>
+    <ion-col class="form-group typeahead-group" size="12">
+      <ion-item>
+        <lib-google-address-input [label]="'USER.CHECKOUT.ADDRESS.ADDRESS' | translate" (addressEvent)="handleAddressChange($event)"> </lib-google-address-input>
+      </ion-item>
+    </ion-col>
+    <ion-col class="form-group typeahead-group" size-lg="6" size-md="6" size-sm="12">
+      <ion-item>
+        <ng-select
+          [items]="countriesList"
+          bindLabel="country_name"
+          bindValue="country_name"
+          formControlName="country"
+          [placeholder]="'USER.CHECKOUT.ADDRESS.COUNTRY' | translate"
+          appendTo="body"
+          class="typeahead"
+        >
+        </ng-select>
+      </ion-item>
+      <span class="error" *ngIf="addressForm.controls['country'].errors && addressForm.controls['country'].touched">{{ 'USER.CHECKOUT.ADDRESS.REQUIRED_FIELD' | translate }}</span>
+    </ion-col>
+    <ion-col class="form-group typeahead-group" size-lg="6" size-md="6" size-sm="12">
+      <ion-item>
+        <ng-select
+          [items]="statesList"
+          [loading]="loadingStates"
+          [readonly]="loadingStates"
+          bindLabel="state_name"
+          bindValue="state_name"
+          formControlName="state"
+          [placeholder]="'USER.CHECKOUT.ADDRESS.STATE' | translate"
+          appendTo="body"
+          class="typeahead"
+          [notFoundText]="notFoundText"
+        >
+        </ng-select>
+      </ion-item>
+      <span class="error" *ngIf="addressForm.controls['state'].errors && !loadingStates && addressForm.controls['state'].touched">{{
+        'USER.CHECKOUT.ADDRESS.REQUIRED_FIELD' | translate
+      }}</span>
+    </ion-col>
+    <ion-col class="item-input form-group" size-lg="6" size-md="6" size-sm="12">
+      <ion-item>
+        <ion-label position="floating">
+          {{ 'USER.CHECKOUT.ADDRESS.HOUSE_NUMBER_AND_STREET_NAME' | translate }}
+        </ion-label>
+        <ion-input formControlName="address" autocomplete="on" name="address"></ion-input>
+      </ion-item>
+      <span class="error" *ngIf="addressForm.controls['address'].touched && addressForm.controls['address'].errors['required']">
+        {{ 'USER.CHECKOUT.ADDRESS.REQUIRED_FIELD' | translate }}
+      </span>
+      <span class="error" *ngIf="addressForm.controls['address']?.errors?.pattern">
+        {{ 'USER.CHECKOUT.ADDRESS.STREET_NUMBER_ERROR' | translate }}
+      </span>
+    </ion-col>
+    <ion-col *ngIf="isPhoneNumber" class="item-input form-group" size-lg="6" size-md="6" size-sm="12">
+      <ion-item>
+        <ion-label position="floating">
+          {{ 'ADMIN.CMS.FORM_FIELDS.SHIPPING.PHONE' | translate }}
+        </ion-label>
+        <ion-input formControlName="phone" autocomplete="on" name="phone"></ion-input>
+      </ion-item>
+      <span class="error" *ngIf="addressForm.controls.phone.errors?.pattern && addressForm.controls.phone.touched">
+        {{ 'USER.CHECKOUT.ADDRESS.INVALID_PHONE' | translate }}
+      </span>
+      <span class="error" *ngIf="addressForm.controls.phone.errors?.required && addressForm.controls.phone.touched">
+        {{ 'USER.CHECKOUT.ADDRESS.REQUIRED_FIELD' | translate }}
+      </span>
+    </ion-col>
+    <ion-col *ngIf="!isPhoneNumber" class="item-input form-group" size-lg="6" size-md="6" size-sm="12">
+      <ion-item>
+        <ion-label position="floating">
+          {{ 'USER.CHECKOUT.ADDRESS.APARTMENT_SUITE_UNIT_ETC' | translate }}
+        </ion-label>
+        <ion-input formControlName="address_line_2" autocomplete="on" name="address_line_2"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col class="item-input form-group" size-lg="6" size-md="6" size-sm="12">
+      <ion-item>
+        <ion-label position="floating">
+          {{ 'USER.CHECKOUT.ADDRESS.TOWN_CITY' | translate }}
+        </ion-label>
+        <ion-input formControlName="city" autocomplete="on" name="city"></ion-input>
+      </ion-item>
+      <span class="error" *ngIf="addressForm.controls['city'].errors && addressForm.controls['city'].touched">{{ 'USER.CHECKOUT.ADDRESS.REQUIRED_FIELD' | translate }}</span>
+    </ion-col>
+    <ion-col class="item-input form-group" size-lg="6" size-md="6" size-sm="12">
+      <ion-item>
+        <ion-label position="floating">
+          {{ 'USER.CHECKOUT.ADDRESS.Postcode_ZIP' | translate }}
+        </ion-label>
+        <ion-input formControlName="zip" autocomplete="on" name="zip"></ion-input>
+      </ion-item>
+      <span class="error" *ngIf="addressForm.controls['zip'].errors && addressForm.controls['zip'].touched">{{ 'USER.CHECKOUT.ADDRESS.REQUIRED_FIELD' | translate }}</span>
+    </ion-col>
+  </ion-row>
+</form>

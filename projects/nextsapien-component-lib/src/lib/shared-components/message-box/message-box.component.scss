@@ -1,0 +1,49 @@
+:host {
+  --header-color: #000;
+  --paragraph-color: rgba(0, 0, 0, 0.5);
+  --background: transparent;
+  --padding-all: 20px;
+
+  --content-width: 209px;
+  display: flex;
+  background: var(--background);
+  width: fit-content;
+  padding: var(--padding-all);
+  box-sizing: border-box;
+  font-family: Lato;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  color: var(--header-color);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  width: var(--content-width);
+  margin: 0;
+}
+
+p {
+  color: var(--paragraph-color);
+  text-align: center;
+  font-size: 12px;
+  width: var(--content-width);
+}
+
+figure {
+  width: var(--content-width);
+
+  img {
+    width: 85px;
+    margin: auto;
+    display: block;
+  }
+  figcaption {
+    text-align: center;
+  }
+}

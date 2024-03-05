@@ -1,0 +1,71 @@
+<div class="showcase-container centered-scrollable">
+  <table>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Data type</th>
+      <th>Required</th>
+      <th>Default</th>
+      <th>Demo</th>
+    </tr>
+    <tr>
+      <td>Component</td>
+      <td>Profile header component</td>
+      <td>This component demo's header part of profile with different type of orientation</td>
+      <td>
+        orientation: string<br />
+        photo: string <br />
+        name: string<br />
+        leftIcon: string<br />
+        leftText: string <br />
+        rightIcon: string<br />
+        rightText: string
+      </td>
+      <td>true</td>
+      <td></td>
+      <td class="last-td">
+        <lib-profile-header
+          class="vertical"
+          [orientation]="vertical"
+          [photo]="client.photo"
+          [name]="client.name"
+          [leftIcon]="icons.hash"
+          [leftText]="client.age + ' ' + 'Years old'"
+          [rightIcon]="icons.location"
+          [rightText]="client.address"
+        >
+        </lib-profile-header>
+      </td>
+    </tr>
+    <tr>
+      <td>Component</td>
+      <td>Profile header component</td>
+      <td>This component demo's header part of profile with different type of orientation</td>
+      <td>
+        orientation: string<br />
+        photo: string <br />
+        name: string<br />
+        leftIcon: string<br />
+        leftText: string <br />
+        rightIcon: string<br />
+        rightText: string
+      </td>
+      <td>true</td>
+      <td></td>
+      <td class="last-td">
+        <lib-profile-header
+          class="horizontal"
+          [orientation]="horizontal"
+          [photo]="client.photo"
+          [name]="client.name"
+          [leftIcon]="icons.hash"
+          [leftText]="client.age + ' ' + 'Years old'"
+          [rightIcon]="icons.location"
+          [rightText]="client.address"
+        >
+        </lib-profile-header>
+      </td>
+    </tr>
+  </table>
+</div>

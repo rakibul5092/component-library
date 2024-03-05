@@ -1,0 +1,7 @@
+<section>
+  <figure *ngIf="imageUrl">
+    <img [src]="imageUrl" [alt]="imageDescription" />
+  </figure>
+  <h2 *ngIf="title">{{ title }}</h2>
+  <p *ngIf="text">{{ text }}</p>
+</section>

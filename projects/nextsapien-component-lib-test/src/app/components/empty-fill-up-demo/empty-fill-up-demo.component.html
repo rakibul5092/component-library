@@ -1,0 +1,54 @@
+<Article class="showcase-container centered-scrollable">
+  <h2>An empty fill up component</h2>
+  <section class="description">
+    <p>The empty fill up component is a simple way of portraying emptiness: An empty cart, a 404 page, e.t.c.</p>
+    <dl>
+      <dt>Passing a 'headerText input to the empty fill up component</dt>
+      <dd>[headerText]="'This is a headerText'"</dd>
+      <dd>[headerText]="'Your cart is empty'"</dd>
+      <dt>Passing a paragraph text to the empty fill up component</dt>
+      <dd>[text]="'we've got no cookies for you but some will be up for grabs tomorrow'"</dd>
+      <dd>[text]="'Your cart is currently empty but you can start filling it up here:'"</dd>
+    </dl>
+
+    <div>
+      <h5>Css variables for customizing the empty fill up component</h5>
+      <ul>
+        <li>--width: customizes the width of the whole component.</li>
+        <li>--image-width: Customizes the width of the empty fill up image.</li>
+        <li>--header-text-color: customizes the color of the header text</li>
+        <li>--text-color: customizes the color of the paragraph text</li>
+        <li>--text-background: customizes the background color of the empty fill up component</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="demo">
+    <div>
+      <h5>Empty fill up without a header text or a paragraph text</h5>
+      <lib-empty-fill-up></lib-empty-fill-up>
+    </div>
+    <div>
+      <h5>Empty fill up with a header text: This is a header text</h5>
+      <lib-empty-fill-up [headerText]="'This is a headerText'"></lib-empty-fill-up>
+    </div>
+    <div>
+      <h5>Empty fill up with an image url</h5>
+      <lib-empty-fill-up [imageUrl]="'https://cdn.pixabay.com/photo/2012/04/24/16/34/garbage-40357_960_720.png'"></lib-empty-fill-up>
+    </div>
+    <div>
+      <h5>Empty fill up with a header text: This is a header text</h5>
+      <lib-empty-fill-up [headerText]="'This is a headerText'" [text]="'Let\'s fill this up! / Let\'s get a date!'"></lib-empty-fill-up>
+    </div>
+  </section>
+
+  <section class="interact">
+    <h5>Interact with Empty fill up component</h5>
+    <div>
+      <input type="text" placeholder="Enter [headerText]" (input)="updateHeaderText($event)" />
+      <input type="text" placeholder="Enter [imageUrl]" (input)="updateImageUrl($event)" value="https://cdn.pixabay.com/photo/2012/04/24/16/34/garbage-40357_960_720.png" />
+      <input type="text" placeholder="Enter [text]" (input)="updateText($event)" />
+    </div>
+    <lib-empty-fill-up [headerText]="headerText" [text]="text" [imageUrl]="'https://cdn.pixabay.com/photo/2012/04/24/16/34/garbage-40357_960_720.png'"></lib-empty-fill-up>
+  </section>
+</Article>

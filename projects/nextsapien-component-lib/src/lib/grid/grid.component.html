@@ -1,0 +1,234 @@
+<div class="search-filters-container" [ngClass]="{ 'search-filters-container--disabled': isEditInProgress }">
+  <ng-container *ngIf="enableGridFilters">
+    <div class="search-filters-container__search">
+      <lib-search-bar placeholderText="Search" (searchStringChange)="handleSearchStringChange($event)"> </lib-search-bar>
+    </div>
+    <div class="search-filters-container__filters">
+      <lib-filter-bar (applyFilter)="handleApplyFilter($event)"></lib-filter-bar>
+    </div>
+  </ng-container>
+</div>
+<div class="table-container" [ngClass]="{ 'table-container--disabled': isEditInProgress }">
+  <p-table
+    *ngIf="display"
+    [lazy]="true"
+    (onLazyLoad)="onLazyLoad($event)"
+    [loading]="isLoading"
+    [columns]="filteredColumns"
+    [value]="processedData"
+    [scrollable]="true"
+    [sortField]="sortField"
+    [sortOrder]="parsedSortOrder"
+    [dataKey]="groupByField ? 'displayValues.' + groupByField.name : 'id'"
+    [groupRowsBy]="groupByField ? 'displayValues.' + groupByField.name : null"
+    [resizableColumns]="true"
+    [columnResizeMode]="'expand'"
+    (onColResize)="colResize($event)"
+    [reorderableColumns]="true"
+    (onColReorder)="colReorder($event)"
+    (onEditComplete)="handleEditComplete($event)"
+    (onEditInit)="handleEditInit($event)"
+    (onEditCancel)="handleEditCancel($event)"
+    rowGroupMode="subheader"
+    scrollDirection="both"
+    responsiveLayout="scroll"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <!-- TODO: enable grid menu and add the edit/drag logic here -->
+        <th class="grid-cell-empty" pFrozenColumn>
+          <div class="separator">
+            <button
+              (click)="toggleAll()"
+              *ngIf="groupByField"
+              type="button"
+              pButton
+              pRipple
+              class="p-button-text p-button-rounded p-button-plain mr-2"
+              [icon]="allRowsExpanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+            ></button>
+          </div>
+        </th>
+        <th
+          *ngFor="let col of filteredColumns"
+          [frozen]="col.pinned"
+          [style.flex]="(col.pinned ? '0 0 ' : '1 1 ') + (col.width ?? 200) + 'px !important'"
+          [style.left]="col.pinned ? col.pinLocationInPx + 'px' : 'unset'"
+          pReorderableColumn
+          pResizableColumn
+          pFrozenColumn
+          alignFrozen="left"
+          class="grid-cell"
+        >
+          <div [pSortableColumn]="col.name" [pSortableColumnDisabled]="!col.sortable" pFrozenColumn class="grid-cell-text">
+            <span class="grid-cell-label" [cosTooltip]="col.label ?? col.name | translate">
+              {{ col.label ?? col.name | translate }}
+            </span>
+          </div>
+          <p-sortIcon *ngIf="col.sortable" [pSortableColumn]="col.name" [pSortableColumnDisabled]="!col.sortable" [field]="col.name" class="grid-cell-action"> </p-sortIcon>
+          <ng-container>
+            <i class="icon-pin grid-cell-action" [hidden]="!col.pinned" (click)="handleUnpinColumn(col, $event)"></i>
+            <button
+              pButton
+              type="button"
+              icon="pi pi-ellipsis-v"
+              class="p-button-rounded p-button-text p-button-plain grid-cell-action"
+              (click)="gridmenu.toggle($event)"
+              *ngIf="col.menuItems?.length"
+            ></button>
+            <p-menu
+              [popup]="true"
+              [model]="col.menuItems"
+              appendTo="body"
+              #gridmenu
+              styleClass="{{ (totalNumberOfPinnedColumns >= maxPinnedColumns ? 'grid-menu-action--restricted' : '') + ' row-menu-items' }}"
+            ></p-menu>
+          </ng-container>
+          <div class="separator"></div>
+        </th>
+        <th class="grid-cell-settings" style="flex: 0 0 40px !important" pFrozenColumn alignFrozen="right">
+          <div class="column-management-button" [ngClass]="{ 'column-management-button--focused': columnManagementModalOpen }" (click)="openManagementModal()">
+            <i class="column-management-button--icon icon-gen3-preferences"></i>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template *ngIf="groupByField" pTemplate="groupheader" let-rowData let-expanded="expanded">
+      <tr class="grid-group-header-row">
+        <div class="grid-group-header-cell" pFrozenColumn alignFrozen="left">
+          <button
+            id="expandBtn"
+            [ngClass]="{ expanded: expanded }"
+            type="button"
+            pButton
+            pRipple
+            [pRowToggler]="rowData"
+            class="p-button-text p-button-rounded p-button-plain mr-2"
+            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+          ></button>
+          <span>
+            {{ groupByField.label + ': ' + (rowData?.displayValues[groupByField.name] || 'None') }}
+          </span>
+        </div>
+      </tr>
+    </ng-template>
+    <ng-template [pTemplate]="groupByField ? 'rowexpansion' : 'body'" let-rowData>
+      <tr>
+        <td pFrozenColumn class="grid-row-menu-button" (click)="projectmenu.toggle($event)">
+          <button pButton type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text p-button-plain"></button>
+          <p-menu styleClass="row-menu-items" [popup]="true" [model]="rowData.rowMenuItems" appendTo="body" #projectmenu></p-menu>
+        </td>
+        <td
+          *ngFor="let col of filteredColumns; let i = index"
+          class="grid-cell-body"
+          [style.flex]="(col.pinned ? '0 0 ' : '1 1 ') + (col.width ?? 200) + 'px !important'"
+          [style.left]="col.pinned ? col.pinLocationInPx + 'px' : 'unset'"
+          [frozen]="col.pinned"
+          [pEditableColumn]="{ column: col, row: rowData }"
+          [pEditableColumnField]="col.name"
+          [pEditableColumnRowIndex]="i"
+          [pEditableColumnDisabled]="!col.editable || !rowData?.hasEditPermissions"
+          [pFocusCellSelector]="'input, [role=combobox]'"
+          pFrozenColumn
+          [ngClass]="{
+            percent: col.controlType === 'Percent',
+            'not-editable': !col.editable || !rowData?.hasEditPermissions,
+            editable: col.editable && rowData?.hasEditPermissions
+          }"
+        >
+          <p-cellEditor>
+            <ng-template pTemplate="input" [ngSwitch]="col.controlType">
+              <lib-form-field *ngSwitchCase="'SingleSelect'" [formFieldControl]="editFormControl" [type]="'select'" [options]="editSelectOptions"></lib-form-field>
+              <lib-form-field *ngSwitchCase="'MultiSelect'" [formFieldControl]="editFormControl" [type]="'multiselectdropdown'" [options]="editSelectOptions"></lib-form-field>
+              <lib-form-field *ngSwitchCase="'Number'" [formFieldControl]="editFormControl" [type]="'number'"></lib-form-field>
+              <lib-form-field *ngSwitchCase="'Percent'" [formFieldControl]="editFormControl" [type]="'percentage'"></lib-form-field>
+              <lib-typeahead-field *ngSwitchCase="'AutoComplete'" [entityFunctions]="rowData.entity"></lib-typeahead-field>
+              <lib-typeahead-field *ngSwitchCase="'AutoCompleteMulti'" [entityFunctions]="rowData.entity" [isMultiselectMode]="true"></lib-typeahead-field>
+              <lib-typeahead-field *ngSwitchCase="'MultiField'" [entityFunctions]="rowData.entity" [isMultiselectMode]="true"></lib-typeahead-field>
+              <lib-form-field
+                *ngSwitchCase="'Text'"
+                [formFieldControl]="editFormControl"
+                [type]="'text'"
+                [submitted]="true"
+                [errorInlineMode]="true"
+                [required]="col?.requiredForEdit"
+                [label]="col.label ?? col.name"
+              ></lib-form-field>
+              <lib-form-field *ngSwitchCase="'Date'" [formFieldControl]="editFormControl" [type]="'date'"></lib-form-field>
+              <span *ngSwitchCase="'Html'" [innerHTML]="rowData?.data[col.name]"></span>
+              <lib-form-field *ngSwitchCase="'Currency'" [formFieldControl]="editFormControl" [type]="'currency'" [hideCents]="true"></lib-form-field>
+              <lib-form-field *ngSwitchCase="'Boolean'" [formFieldControl]="editFormControl" [type]="'select'" [options]="editSelectOptions"></lib-form-field>
+            </ng-template>
+            <ng-template pTemplate="output" [ngSwitch]="col.controlType">
+              <span *ngSwitchCase="'SingleSelect'" [cosTooltip]="rowData?.displayValues[col.name]?.length > 25 ? rowData?.displayValues[col.name] : ''">{{
+                rowData?.displayValues[col.name] ?? ''
+              }}</span>
+              <span *ngSwitchCase="'MultiSelect'" [cosTooltip]="rowData?.displayValues[col.name]?.length > 25 ? rowData?.displayValues[col.name] : ''">{{
+                rowData?.displayValues[col.name] ?? ''
+              }}</span>
+              <span *ngSwitchCase="'AutoComplete'" [cosTooltip]="rowData?.displayValues[col.name]?.length > 25 ? rowData?.displayValues[col.name] : ''">{{
+                rowData?.displayValues[col.name] ?? ''
+              }}</span>
+              <span *ngSwitchCase="'AutoCompleteMulti'" [cosTooltip]="rowData?.displayValues[col.name]?.length > 25 ? rowData?.displayValues[col.name] : ''">
+                <ng-container *ngIf="isArray(rowData?.data?.[col.name]); else notAnArray">
+                  <ng-container *ngFor="let item of rowData?.data?.[col.name]; last as last">
+                    <a *ngIf="item?.Url" [href]="item.Url" target="_blank">{{ item.Value }}</a>
+                    <span *ngIf="!item?.Url">{{ item.Value }}</span>
+                    <ng-container *ngIf="!last">, </ng-container>
+                  </ng-container>
+                </ng-container>
+                <ng-template #notAnArray>{{ rowData?.displayValues[col.name] ?? '' }}</ng-template>
+              </span>
+              <span *ngSwitchCase="'MultiField'" [cosTooltip]="rowData?.displayValues[col.name]?.length > 25 ? rowData?.displayValues[col.name] : ''">
+                <ng-container *ngIf="isArray(rowData?.data?.[col.name]); else notAnArray">
+                  <ng-container *ngFor="let item of rowData?.data?.[col.name]; last as last">
+                    <a *ngIf="item?.Url" [href]="item.Url" target="_blank">{{ item.Value }}</a>
+                    <span *ngIf="!item?.Url">{{ item.Value }}</span>
+                    <ng-container *ngIf="!last">, </ng-container>
+                  </ng-container>
+                </ng-container>
+                <ng-template #notAnArray>{{ rowData?.displayValues[col.name] ?? '' }}</ng-template>
+              </span>
+              <span *ngSwitchCase="'Number'" [cosTooltip]="rowData?.displayValues[col.name]?.length > 25 ? rowData?.displayValues[col.name] : ''">{{
+                rowData?.displayValues[col.name]
+              }}</span>
+              <span *ngSwitchCase="'Text'" [cosTooltip]="rowData?.displayValues[col.name]?.length > 25 ? rowData?.displayValues[col.name] : ''">{{
+                rowData?.displayValues[col.name]
+              }}</span>
+              <span
+                *ngSwitchCase="'Html'"
+                [cosTooltip]="rowData?.displayValues[col.name]?.length > 25 ? rowData?.displayValues[col.name] : ''"
+                [innerHTML]="rowData?.displayValues[col.name]"
+                >{{ rowData?.displayValues[col.name] }}</span
+              >
+              <span *ngSwitchCase="'Percent'">{{ rowData?.displayValues[col.name] }}</span>
+              <span *ngSwitchCase="'Date'">{{ rowData?.displayValues[col.name] }}</span>
+              <span *ngSwitchCase="'Currency'">{{ rowData?.displayValues[col.name] }}</span>
+              <span *ngSwitchCase="'Boolean'">{{ rowData?.displayValues[col.name] }}</span>
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td class="grid-cell-settings"></td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td class="grid-group-no-records">No records found</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<div class="paginator-container" *ngIf="totalRecords > 0" [ngClass]="{ 'paginator-container--disabled': isEditInProgress }">
+  <p-paginator
+    [first]="first"
+    [rows]="rowsPerPage ?? defaultRowsPerPage"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="rowsPerPageOptions ?? defaultRowPerPageOptions"
+    [showJumpToPageInput]="true"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="{first} to {last} of {totalRecords}"
+    (onPageChange)="paginate($event)"
+  >
+  </p-paginator>
+  <span class="page-size-text"> per page </span>
+</div>

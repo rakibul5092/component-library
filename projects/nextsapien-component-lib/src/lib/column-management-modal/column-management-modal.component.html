@@ -1,0 +1,103 @@
+<div class="column-management-modal">
+  <div class="column-management-modal__header" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <div class="column-management-modal__header-text">Manage Columns</div>
+    <div class="column-management-modal__header-action">
+      <i class="icon icon-close" (click)="handleClickCancel()"></i>
+    </div>
+  </div>
+  <div class="column-management-modal__body">
+    <div class="column-management-modal__body-left-side">
+      <div class="column-management-modal__body-left-side-header">
+        <div class="column-management-modal__body-left-side-header-text">Select columns to display</div>
+        <div>
+          <lib-search-bar placeholderText="Search Columns" (searchStringChange)="handleSearchStringChange($event)"> </lib-search-bar>
+        </div>
+      </div>
+      <div class="body">
+        <ng-container *ngIf="leftColumnGroups.length">
+          <div *ngFor="let group of leftColumnGroups; index as i">
+            <div (click)="toggleMap[i] = !toggleMap[i]" class="group">
+              <i [ngClass]="{ 'icon-gen3-angle-down': !toggleMap[i], 'icon-gen3-angle-right': toggleMap[i] }"></i>
+              <div class="label">{{ group.groupName }}</div>
+            </div>
+            <ng-container *ngIf="!toggleMap[i]">
+              <div *ngFor="let item of group.columns" class="item">
+                <mat-checkbox [checked]="item.visible || groupByField?.name === item.name" (change)="handleCheck(item)">
+                  <div class="label">
+                    {{ item.label }}
+                  </div>
+                </mat-checkbox>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="!leftColumnGroups.length">
+          <div class="no-results">
+            <div class="no-results__icon-container">
+              <i class="icon-search"></i>
+            </div>
+            <div class="no-results__text-container">No results found</div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="column-management-modal__body-divider"></div>
+    <div class="column-management-modal__body-right-side">
+      <div class="column-management-modal__body-right-side-header">
+        <div class="column-management-modal__body-right-side-header-text">Reorder columns</div>
+        <div>Drag and drop to change the column order.</div>
+      </div>
+      <div cdkDropList (cdkDropListDropped)="drop($event)" class="body">
+        <ng-container *ngIf="rightColumns.length">
+          <div *ngIf="groupByField?.label" class="field field--grouped">
+            <div class="field__label">
+              <i class="icon-gen3-ellipsis-vertical"></i>
+              <i class="icon-gen3-ellipsis-vertical"></i>
+              {{ groupByField.label }}
+            </div>
+            <div (click)="handleUngroup()" class="field__close">
+              <i class="icon-group-by"></i>
+            </div>
+          </div>
+          <div *ngFor="let column of rightColumns" cdkDrag class="field">
+            <div class="field__placeholder" *cdkDragPlaceholder></div>
+            <div class="field__label">
+              <i class="icon-gen3-ellipsis-vertical"></i>
+              <i class="icon-gen3-ellipsis-vertical"></i>
+              {{ column.label }}
+            </div>
+            <div *ngIf="column.pinned" (click)="handleUnpin(column)" class="field__pin">
+              <i class="icon-pin"></i>
+            </div>
+            <div (click)="handleCheck(column)" class="field__close">
+              <i class="icon-close"></i>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="!rightColumns.length">
+          <div class="no-columns">
+            <div class="no-columns__icon-container">
+              <i class="icon-gen3-columns"></i>
+            </div>
+            <div class="no-columns__text-container">
+              <div>No columns selected</div>
+              <div>Please select at least one column.</div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="column-management-modal__footer">
+    <div class="column-management-modal__cancel-button" (click)="handleClickCancel()">Cancel</div>
+    <div
+      class="column-management-modal__save-button"
+      [ngClass]="{ disabled: !rightColumns.length }"
+      (click)="rightColumns.length && handleClickSave()"
+      [cosTooltip]="!rightColumns.length ? 'Please select at least one column.' : ''"
+      [directionPreference]="tooltipDirection"
+    >
+      Save
+    </div>
+  </div>
+</div>

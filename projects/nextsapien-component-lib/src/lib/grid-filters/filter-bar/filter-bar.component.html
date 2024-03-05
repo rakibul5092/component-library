@@ -1,0 +1,73 @@
+<div class="chip_list-wrapper">
+  <div *ngIf="userFiltersList?.length && activeFilter?.Name" class="chip_list-wrapper-text">
+    <span [cosTooltip]="activeFilter?.Name" class="chip_list-wrapper-text--prefix">
+      {{ activeFilter?.Name }}
+    </span>
+  </div>
+  <mat-chip-list #chipList *ngIf="filters?.length && activeFilter?.Name" class="chip_list">
+    <ng-container *ngFor="let filter of filters; let pillIndex = index">
+      <mat-chip *ngIf="pillIndex < maxFilterCount || showAllFilters" [cosTooltip]="filter.label" (removed)="removeFilter(filter)" class="chip_list-item">
+        <span class="chip_list-item-text">{{ filter.label }}</span>
+        <button matChipRemove class="chip_list-item-button">
+          <i class="chip_list-item-button-icon icon-close"></i>
+        </button>
+      </mat-chip>
+    </ng-container>
+    <mat-chip *ngIf="filters.length > maxFilterCount" (click)="toggleShowAllFilters()" class="chip_list-item">
+      <span *ngIf="!showAllFilters; else temp" cosTooltip="Show all filters"> + {{ filters.length - maxFilterCount }} </span>
+      <ng-template #temp>
+        <span cosTooltip="Show less filters"> Show Less </span>
+      </ng-template>
+    </mat-chip>
+  </mat-chip-list>
+  <div class="chip_list-wrapper-text--info" *ngIf="!filters.length">No filters applied</div>
+  <div class="chip_list-wrapper-text--sufix">
+    <span (click)="removeAllFilters()" [ngClass]="{ 'chip_list-wrapper-text--disabled': activeFilter?.ProjectGridFilterId > -1 && !filters.length }"> Clear </span>
+  </div>
+  <div class="chip_list-menu-wrapper">
+    <div class="chip_list-menu-wrapper__text filters-button" (click)="handleOpenFilterModal()">
+      <i class="icon-filter"></i>
+      Filters
+    </div>
+    <div class="chip_list-menu-wrapper__text" [matMenuTriggerFor]="filterMenu">
+      <i class="chip_list-menu-wrapper__text--icon icon-caret-down"></i>
+    </div>
+  </div>
+  <mat-menu #filterMenu="matMenu" class="menu">
+    <div
+      mat-menu-item
+      *ngIf="userFiltersList?.length"
+      [ngClass]="{ 'chip_list-menu-item--disabled': !activeFilter?.UserFilters?.length }"
+      (click)="activeFilter?.UserFilters?.length && updateUserFilters(activeFilter)"
+      class="chip_list-menu-item"
+    >
+      Save
+    </div>
+    <mat-divider></mat-divider>
+    <div class="mat-menu-item chip_list-menu-item--heading">Standard</div>
+    <div
+      *ngFor="let standardFilter of standardFilters"
+      mat-menu-item
+      (click)="handleApplyStandardFilter(standardFilter.value)"
+      [ngClass]="{ 'chip_list-menu-item--saved': standardFilter.value === activeFilter?.ProjectGridFilterId }"
+      class="chip_list-menu-item"
+    >
+      {{ standardFilter.label }}
+      <div class="icon icon-gen3-check"></div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="mat-menu-item chip_list-menu-item--heading">Saved</div>
+    <div
+      *ngFor="let savedFilter of userFiltersList; let filterIndex = index"
+      mat-menu-item
+      (click)="handleApplyFilter(savedFilter)"
+      [ngClass]="{ 'chip_list-menu-item--saved': savedFilter.ProjectGridFilterId === activeFilter?.ProjectGridFilterId }"
+      class="chip_list-menu-item"
+    >
+      {{ savedFilter?.Name }}
+      <div class="icon icon-gen3-check"></div>
+    </div>
+    <mat-divider></mat-divider>
+    <div mat-menu-item (click)="handleManageFilterModal()" class="chip_list-menu-item">Manage Saved Filters</div>
+  </mat-menu>
+</div>

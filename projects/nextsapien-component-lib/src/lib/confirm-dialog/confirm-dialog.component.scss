@@ -1,0 +1,25 @@
+header {
+  text-transform: lowercase;
+}
+
+.header > h2 {
+  text-align: center;
+}
+
+.dialog-message {
+  text-transform: lowercase;
+  text-align: center;
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.header {
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.mat-dialog-actions {
+  justify-content: space-between;
+}

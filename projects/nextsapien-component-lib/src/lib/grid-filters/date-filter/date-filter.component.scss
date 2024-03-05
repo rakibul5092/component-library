@@ -1,0 +1,71 @@
+.form-field {
+  &__date-container {
+    display: flex;
+    border-radius: 2px;
+    border: 1px solid #dfe0e3;
+    border-radius: 2px;
+    background-color: white;
+
+    &--focus {
+      border: 1px solid #237fd5;
+    }
+
+    &--error {
+      border: 1px solid #d32f2f;
+    }
+
+    &--disabled {
+      background-color: #e3e8ea;
+    }
+  }
+
+  &__date-input {
+    display: flex;
+    position: relative;
+    width: 100%;
+    padding-right: 5px;
+    font-size: 12px;
+
+    &-field {
+      padding-left: 5px;
+    }
+
+    &-icon {
+      color: #24282a;
+      cursor: pointer;
+      align-self: center;
+      padding-right: 5px;
+      position: absolute;
+      right: 0;
+      top: calc(50% - 6px);
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+
+  &__footer-button {
+    color: #10365a;
+    border: 1px solid #10365a;
+    border-radius: 2px;
+    padding: 7px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: all 0.5s ease;
+
+    &:hover {
+      color: #fff;
+      background-color: #10365a;
+    }
+  }
+
+  &__error-text {
+    font-size: 12px;
+    font-weight: 400;
+    font-family: Roboto;
+    color: #d32f2f;
+    position: relative;
+    margin-top: 8px;
+  }
+}

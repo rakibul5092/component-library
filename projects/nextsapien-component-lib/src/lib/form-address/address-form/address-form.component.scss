@@ -1,0 +1,103 @@
+ion-row {
+  justify-content: space-between;
+
+  ion-col {
+    padding: 10px 0;
+
+    mat-label {
+      color: #000;
+    }
+
+    ion-input {
+      font-size: 13px;
+      font-family: var(--ion-secondary-font-family);
+    }
+
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  ion-col.item-input {
+    padding-left: 15px;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    min-width: 100px;
+    border-radius: 150px;
+
+    &:nth-child(2) {
+      margin-left: 5%;
+    }
+  }
+}
+
+.mat-stepper {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
+
+.address-field {
+  margin-bottom: 10px;
+
+  mat-label,
+  input {
+    color: #000;
+  }
+}
+
+:host ::ng-deep {
+  .stripe-form-container {
+    width: 100%;
+    background: #fff;
+    height: 40px;
+    padding: 10px 12px;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+
+  .stripe-form_error {
+    color: var(--ion-color-danger);
+    font-weight: 500;
+  }
+
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    background: #fff;
+    font-family: var(--ion-font-family);
+    border-radius: 0 !important;
+  }
+
+  .mat-form-field-wrapper {
+    margin-bottom: -1.25em;
+  }
+
+  .mat-form-field-underline {
+    display: none;
+  }
+
+  ion-item {
+    &.ion-invalid.ion-touched,
+    &.ion-invalid.ion-submitted {
+      ion-label {
+        color: var(--ion-color-danger);
+      }
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .px-md-5 {
+    padding-left: 10px !important;
+  }
+}
+
+:host lib-google-address-input {
+  width: 100%;
+}

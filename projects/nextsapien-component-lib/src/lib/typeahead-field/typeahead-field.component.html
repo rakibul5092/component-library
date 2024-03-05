@@ -1,0 +1,43 @@
+<div class="typeahead-field" [ngClass]="{ 'typeahead-field--required': required, 'typeahead-field--focused': focused, 'typeahead-field--error': error }" #typeahead>
+  <div *ngIf="entitySelectMode" class="typeahead-field__entity-selector">
+    <mat-label [matMenuTriggerFor]="entitySelectMenu" class="typeahead-field__entity-selector-label">
+      <div class="typeahead-field__entity-selector-label-icon" [innerHtml]="entityFunctions[selectedEntityIndex].entityMetadata.iconHtml"></div>
+      <i class="icon icon-gen3-caret-down typeahead-field__entity-selector-label-dropdown-icon"></i>
+    </mat-label>
+    <mat-menu #entitySelectMenu="matMenu" class="typeahead-field__entity-selector-menu">
+      <button *ngFor="let entityFunction of entityFunctions; index as i" (click)="this.selectedEntityIndex = i" class="typeahead-field__entity-selector-menu-item" mat-menu-item>
+        <div class="typeahead-field__entity-selector-menu-item-icon" [innerHtml]="entityFunctions[i].entityMetadata.iconHtml"></div>
+        <div class="typeahead-field__entity-selector-menu-item-label">
+          {{ entityFunction.entityMetadata.typeLabel }}
+        </div>
+      </button>
+    </mat-menu>
+  </div>
+  <div *ngIf="required" class="typeahead-field__required" [ngClass]="{ 'typeahead-field__required--error': error }" [cosTooltip]="'Required'">
+    <div class="typeahead-field__required-indicator">*</div>
+  </div>
+  <lib-search-bar
+    [showIcon]="false"
+    [placeholderText]="entitySelectMode ? entityFunctions[selectedEntityIndex].entityMetadata.placeholderText : placeholderText"
+    [inputText]="inputText"
+    (focused)="handleFocus()"
+    (unfocused)="handleFocusOut()"
+    (searchStringChange)="search($event)"
+    (cleared)="clear()"
+  ></lib-search-bar>
+</div>
+<lib-typeahead-result
+  *ngIf="displayResults"
+  [groups]="searchResults"
+  [selectionFunc]="resultSelectFunc"
+  [alternateText]="alternateText"
+  [loading]="loading"
+  (alternateCalled)="handleAlternateCalled()"
+>
+</lib-typeahead-result>
+<div *ngIf="suggestionText && !displayResults" (click)="handleSuggestionClicked()" class="typeahead-field__suggestion-text">
+  {{ suggestionText }}
+</div>
+<div *ngIf="error" class="typeahead-field__error-text">
+  {{ error }}
+</div>

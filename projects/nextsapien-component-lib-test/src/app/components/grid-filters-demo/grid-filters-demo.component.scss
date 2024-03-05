@@ -1,0 +1,19 @@
+@import '../../../styles/colors';
+
+:host {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+  align-items: center;
+}
+
+.detail-section {
+  margin-bottom: 15px;
+
+  .header {
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+}

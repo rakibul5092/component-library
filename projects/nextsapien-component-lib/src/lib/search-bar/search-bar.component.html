@@ -1,0 +1,18 @@
+<div class="search-bar">
+  <i *ngIf="showIcon" class="search-bar__icon search-bar__search-icon icon-gen3-search" id="#searchBarIcon" (click)="focus()"></i>
+  <input
+    #searchInput
+    id="searchInput"
+    class="search-bar__input custom__input"
+    [ngClass]="{ 'search-bar__input--no-icon': !showIcon }"
+    type="text"
+    [placeholder]="placeholderText"
+    [(ngModel)]="inputText"
+    (keyup)="emit()"
+    (keydown)="$event.stopPropagation()"
+    (focus)="handleFocus()"
+    (focusout)="handleFocusOut()"
+    autocomplete="off"
+  />
+  <i *ngIf="showIcon" class="search-bar__icon search-bar__clear-icon icon-gen3-cancel" [ngClass]="{ hidden: !input.nativeElement.value }" (click)="clear()"></i>
+</div>

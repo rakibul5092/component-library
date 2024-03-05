@@ -1,0 +1,13 @@
+<input type="file" accept=".jpg,.png,.jpeg" (change)="uploadFiles($event)" placeholder="Upload file" multiple #upload [disabled]="isDisabled" />
+
+<ion-button class="upload-button" color="tertiary" type="button" (click)="upload.click()" matTooltip="Upload an image" [disabled]="isDisabled || loading">
+  <div class="spinner" *ngIf="loading">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+  <span *ngIf="!loading">
+    <span *ngIf="smallScreen" class="small-screen">+</span>
+    <span *ngIf="!smallScreen" class="large-screen">{{ uploadText }}</span>
+  </span>
+</ion-button>

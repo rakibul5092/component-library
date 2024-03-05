@@ -1,0 +1,42 @@
+<div
+  class="form-field__date-container"
+  [ngClass]="{
+    'form-field__date-container--focus': focused,
+    'form-field__date-container--error': formFieldControl.touched && submitted && formFieldControl.errors,
+    'form-field__date-container--disabled': disabled
+  }"
+>
+  <div class="form-field__date-input">
+    <mat-form-field class="form-field__date-input-field" *ngIf="rangeSelect; else singleSelect">
+      <ng-container>
+        <mat-date-range-input [formGroup]="rangeGroup" [rangePicker]="picker">
+          <input matStartDate class="custom__input" formControlName="start" (focus)="handleFocus()" (focusout)="processDate($event, 'start')" placeholder="Start date" />
+          <input matEndDate class="custom__input" formControlName="end" (focus)="handleFocus()" (focusout)="processDate($event, 'end')" placeholder="End date" />
+        </mat-date-range-input>
+        <mat-date-range-picker #picker panelClass="lib-date-filter"> </mat-date-range-picker>
+        <i class="icon icon-gen3-appointment form-field__date-input-icon" (click)="picker.open()"></i>
+      </ng-container>
+    </mat-form-field>
+    <ng-template #singleSelect>
+      <mat-form-field class="form-field__date-input-field">
+        <input
+          matInput
+          class="custom__input"
+          [matDatepicker]="picker"
+          [placeholder]="dateInputPlaceholder"
+          [formControl]="formFieldControl"
+          (focus)="handleFocus()"
+          (focusout)="processDate($event)"
+          #dateInput
+        />
+        <mat-datepicker #picker panelClass="lib-date-filter"> </mat-datepicker>
+        <i class="icon icon-gen3-appointment form-field__date-input-icon" (click)="picker.open()"></i>
+      </mat-form-field>
+    </ng-template>
+  </div>
+</div>
+<div *ngIf="((formFieldControl.touched) && (formFieldControl.errors?.['pattern'] || formFieldControl.errors?.['matDatepickerParse']))" class="form-field__error-text">
+  Please enter a valid date.
+</div>
+<div *ngIf="rangeGroup.controls['start'].hasError('matDatepickerParse')" class="form-field__error-text">Please enter a valid start date.</div>
+<div *ngIf="rangeGroup.controls['end'].hasError('matDatepickerParse')" class="form-field__error-text">Please enter a valid end date.</div>

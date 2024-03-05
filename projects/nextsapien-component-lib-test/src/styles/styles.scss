@@ -1,0 +1,284 @@
+// Custom Theming for Angular Material
+@use '@angular/material' as mat;
+// For more information: https://material.angular.io/guide/theming
+@import '@angular/material/theming';
+// Plus imports for other components in your app.
+
+$custom-typography: mat.define-typography-config(
+  $font-family: 'Roboto',
+);
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core($custom-typography);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$ns-outlook-add-in-primary: mat.define-palette(mat.$indigo-palette);
+$ns-outlook-add-in-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$ns-outlook-add-in-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$ns-outlook-add-in-theme: mat.define-light-theme($ns-outlook-add-in-primary, $ns-outlook-add-in-accent, $ns-outlook-add-in-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($ns-outlook-add-in-theme);
+
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/cdk/overlay-prebuilt.css';
+@import './colors';
+
+// Dark theme
+@import './dark.scss';
+
+@import '../../../nextsapien-component-lib/src/lib/shared-styles/styles.scss';
+@import './grid_styles';
+
+html {
+  display: flex;
+  flex: 1 1 auto;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Roboto;
+  font-size: 12px;
+}
+
+body {
+  display: flex;
+  flex: 1 1 auto;
+  width: 100vw;
+  margin: 0px;
+}
+
+button {
+  font-family: Roboto;
+}
+
+a {
+  color: $ns-grey-900;
+}
+
+code {
+  color: $ns-error-primary;
+  background-color: $ns-background-grey;
+  margin: 5px 10px;
+  width: fit-content;
+}
+
+table {
+  width: 100%;
+  border-radius: 4px;
+  margin-top: 15px;
+}
+
+table,
+th,
+td {
+  border: 1px solid $ns-neutral-6;
+  border-collapse: collapse;
+  color: black;
+}
+
+th,
+td {
+  padding: 5px;
+  max-width: 25%;
+}
+
+// Shared Component Styles
+
+.hidden {
+  display: none !important;
+}
+
+.intro {
+  display: flex;
+  flex: 0 0 auto;
+  font-size: 18px;
+  text-align: center;
+  color: $ns-grey-900;
+  width: 75%;
+  padding: 20px;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  flex: 0 0 auto;
+  font-size: 15px;
+  text-align: center;
+  color: $ns-grey-900;
+  width: 75%;
+  justify-content: center;
+  padding: 10px;
+}
+
+.info {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  font-size: 14px;
+  color: $ns-grey-800;
+  padding: 10px;
+  line-height: 20px;
+  width: 75%;
+}
+
+.detail-section {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 10px;
+}
+
+.code-section {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 15px;
+  background-color: $ns-background-grey;
+}
+
+.component-demo {
+  width: 50%;
+  background-color: white;
+  margin: 20px 20px 40px 20px;
+  padding: 10px;
+  border: 1px solid $ns-neutral-6;
+  border-radius: 3px;
+}
+
+.detail {
+  display: flex;
+  flex: 1 1 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.showcase-container {
+  width: 100%;
+  height: 100%;
+  padding: 25px 25px 25px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: calc(100% - 55px);
+}
+
+.centered-scrollable {
+  align-items: center;
+  overflow-y: auto;
+}
+
+.last-td {
+  padding: 15px;
+  background: #27242c;
+}
+
+app-otp-input-test {
+  form > app-otp-input {
+    input {
+      width: 4rem !important;
+      text-align: center;
+    }
+  }
+}
+
+/*****************************************************
+	Custom styling example bellow.
+*****************************************************/
+
+.iti {
+  display: block !important;
+  margin-bottom: 20px;
+}
+
+.iti .dropdown-menu.country-dropdown {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-color: #c7cace;
+  margin-top: -1px;
+}
+
+.iti .iti__country-list {
+  box-shadow: none;
+  font-size: 14px;
+  margin-left: 0;
+  width: 244px;
+  max-height: 170px;
+}
+
+.iti__flag-container.open + input {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.iti .search-container input {
+  font-size: 14px;
+  border-color: #c7cace;
+  border-radius: 0;
+  padding: 5px 10px;
+}
+
+.iti .search-container input:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 479px) {
+  .iti .iti__country-list {
+    width: 88.3vw;
+  }
+}
+
+tel-input input {
+  height: 44px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #c7cace;
+  border-radius: 4px;
+  font-size: 18px;
+}
+
+tel-input.ng-invalid.ng-touched input {
+  border: 1px solid #c0392b;
+}
+
+tel-input input:hover {
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.24);
+}
+
+tel-input input:focus {
+  outline: none !important;
+  border-color: #3498db;
+  box-shadow: 0 0 0 0 #000;
+}
+
+tel-input input::-webkit-input-placeholder {
+  color: #bac2c7;
+}
+
+tel-input input:-ms-input-placeholder {
+  color: #bac2c7;
+}
+
+tel-input input::-ms-input-placeholder {
+  color: #bac2c7;
+}
+
+tel-input input::placeholder {
+  color: #bac2c7;
+}
+
+tel-input input[disabled] {
+  background-color: #e5eaf1;
+}

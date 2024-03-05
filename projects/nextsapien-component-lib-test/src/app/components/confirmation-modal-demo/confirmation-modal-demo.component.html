@@ -1,0 +1,77 @@
+<div class="detail">
+  <div class="intro">MultiField</div>
+  <div class="info">MultiField is an editable list component where each row can consist of one or more fields of various types.</div>
+  <div class="detail-section">
+    <div class="header">Properties</div>
+    <table>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Data type</th>
+        <th>Required</th>
+        <th>Default</th>
+        <th>Demo</th>
+      </tr>
+      <tr>
+        <td>Input</td>
+        <td>title</td>
+        <td>The text that is displayed at the top of the modal.</td>
+        <td>string</td>
+        <td>false</td>
+        <td>'Are you sure you want to enable demo?'</td>
+        <td>
+          <input type="text" [(ngModel)]="title" />
+        </td>
+      </tr>
+      <tr>
+        <td>Input</td>
+        <td>dialogMessage</td>
+        <td>The text that is displayed below the title.</td>
+        <td>string</td>
+        <td>false</td>
+        <td>'This is the demo dialog message.'</td>
+        <td>
+          <input type="text" [(ngModel)]="dialogMessage" />
+        </td>
+      </tr>
+      <tr>
+        <td>Input</td>
+        <td>confirmText</td>
+        <td>The text that is displayed on the confirm modal botton.</td>
+        <td>string</td>
+        <td>false</td>
+        <td>'Save'</td>
+        <td>
+          <input type="text" [(ngModel)]="confirmText" />
+        </td>
+      </tr>
+      <tr>
+        <td>Input</td>
+        <td>warningModal</td>
+        <td>Determines the theme of the modal.</td>
+        <td>boolean</td>
+        <td>false</td>
+        <td>false</td>
+        <td>
+          <mat-slide-toggle (change)="handleWarningModalChange()"></mat-slide-toggle>
+        </td>
+      </tr>
+      <tr>
+        <td>Input</td>
+        <td>hideCancelAction</td>
+        <td>Hide the cancel button on the confirmation modal dialog.</td>
+        <td>boolean</td>
+        <td>false</td>
+        <td>false</td>
+        <td>
+          <mat-slide-toggle (change)="handleCancelActionChange()"></mat-slide-toggle>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="detail-section">
+    <div class="header">Demo</div>
+    <button class="button">Launch Confirmation Modal</button>
+  </div>
+</div>

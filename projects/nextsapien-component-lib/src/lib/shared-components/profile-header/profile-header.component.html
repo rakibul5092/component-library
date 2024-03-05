@@ -1,0 +1,18 @@
+<div [class]="'profile profile-' + orientation">
+  <div class="profile-photo">
+    <img [class]="'profile-photo-' + orientation" [src]="photo" />
+  </div>
+  <div class="profile-bottom-container">
+    <span [class]="'name-' + orientation + ' f-calistoga f-w-400 h-160 f-white '">{{ name }}</span>
+    <div [class]="'p-icon-text p-icon-text-' + orientation">
+      <div [class]="'icon-container' + ' icon-container-' + orientation">
+        <ion-icon [src]="leftIcon"></ion-icon>
+        <span class="f-lato f-w-400 f-sm h-160 f-dark">{{ leftText }}</span>
+      </div>
+      <div class="icon-container">
+        <ion-icon [src]="rightIcon"></ion-icon>
+        <span class="f-lato f-w-400 f-sm h-160 f-dark">{{ rightText }}</span>
+      </div>
+    </div>
+  </div>
+</div>

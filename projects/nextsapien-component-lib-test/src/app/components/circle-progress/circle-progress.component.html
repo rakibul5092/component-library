@@ -1,0 +1,64 @@
+<div class="showcase-container centered-scrollable">
+  <table>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Data type</th>
+      <th>Required</th>
+      <th>Default</th>
+      <th>Demo</th>
+    </tr>
+    <tr>
+      <td>Progress</td>
+      <td>Circlular Progress</td>
+      <td>This component renders progress of earnings</td>
+      <td>value: Number <br />max: Number<br />prefix: string<br />type: string<br />width: string<br />height: string</td>
+      <td>true</td>
+      <td></td>
+      <td class="last-td">
+        <!-- Without image -->
+        <lib-circle-progress [value]="240" [max]="500" prefix="$" type="Earnings" class="earnings"> </lib-circle-progress>
+      </td>
+    </tr>
+    <tr>
+      <td>Progress</td>
+      <td>Circular progress with inner image</td>
+      <td>This component renders profile progress with photo inside.</td>
+      <td>value: Number <br />max: Number<br />prefix: string<br />imageUrl: string<br />width: string<br />height: string</td>
+      <td>true</td>
+      <td></td>
+      <td class="last-td">
+        <!-- With image -->
+        <lib-circle-progress class="profile-img" [max]="50" [value]="36" prefix="" imageUrl="https://i.ibb.co/Cv0FvRb/unsplash-WNo-Ln-Jo7t-S8profile.png"></lib-circle-progress>
+      </td>
+    </tr>
+    <tr>
+      <td>Progress</td>
+      <td>Circular progress with inner image [interactive]</td>
+      <td>
+        <h4>
+          Adjust size of circle progress <mark>[{{ width }}]</mark>
+        </h4>
+        <input type="range" min="50" max="300" (input)="onInput($event)" />
+        <div class="width-value">
+          <span class="min-value">50</span>
+          <span class="max-value">300</span>
+        </div>
+      </td>
+      <td>value: Number <br />max: Number<br />prefix: string<br />imageUrl: string<br />width: string<br />height: string</td>
+      <td>true</td>
+      <td></td>
+      <td class="last-td">
+        <!-- With image -->
+        <lib-circle-progress
+          [max]="50"
+          [value]="36"
+          prefix=""
+          [style]="{ width: width }"
+          imageUrl="https://i.ibb.co/Cv0FvRb/unsplash-WNo-Ln-Jo7t-S8profile.png"
+        ></lib-circle-progress>
+      </td>
+    </tr>
+  </table>
+</div>

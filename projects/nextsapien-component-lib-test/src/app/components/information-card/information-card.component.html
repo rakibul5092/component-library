@@ -1,0 +1,48 @@
+<div class="showcase-container">
+  <table>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Data type</th>
+      <th>Required</th>
+      <th>Default</th>
+      <th>Demo</th>
+    </tr>
+    <tr>
+      <td>ion-card</td>
+      <td>Information card</td>
+      <td>This is an ion-card information box style which contains the header and it's information. This demo component has used ion-card global style</td>
+      <td>style</td>
+      <td></td>
+      <td></td>
+      <td class="last-td">
+        <!-- About me -->
+        <ion-card class="box-container">
+          <span class="card-header">About me</span>
+          <span class="information"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis mattis aliquet fringilla sit integer. Hendrerit pharetra ornare non.</span>
+        </ion-card>
+      </td>
+    </tr>
+
+    <tr>
+      <td>ion-card</td>
+      <td>Information card</td>
+      <td>This is an ion-card information box style which contains the header and it's images. This demo component has used ion-card global style</td>
+      <td>style</td>
+      <td></td>
+      <td></td>
+      <td class="last-td">
+        <!-- My photos section -->
+        <ion-card class="box-container">
+          <span class="card-header with-photo">My Photos</span>
+          <div class="gallery-container">
+            <div *ngFor="let photo of myPhotos; let i = index" class="gallery">
+              <img [src]="photo" alt="Cinque Terre" />
+            </div>
+          </div>
+        </ion-card>
+      </td>
+    </tr>
+  </table>
+</div>

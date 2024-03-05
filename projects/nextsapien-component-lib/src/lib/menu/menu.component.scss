@@ -1,0 +1,97 @@
+$top-bar-height: 56px;
+ion-menu {
+  ion-label {
+    margin: 0 0 0 7%;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .logo-wrapper {
+    max-width: 8rem;
+    margin: 2rem auto 4rem auto;
+  }
+
+  /*reset highlight color and opacity of ion-item to be replaced with scale up hover effect*/
+  ion-item {
+    --background-hover: transparent;
+    --background-hover-opacity: 1;
+  }
+}
+
+::ng-deep {
+  ion-item {
+    overflow: visible;
+    img {
+      transition: transform 0.5s;
+    }
+
+    &:hover img {
+      transform: scale(1.05, 1.05);
+    }
+  }
+}
+
+ion-header {
+  max-width: fit-content;
+
+  ion-menu-button {
+    margin-left: 3px;
+  }
+
+  .menu-bottom-img {
+    position: fixed;
+    top: 94%;
+    left: 33px;
+    width: 50px;
+    height: auto;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+
+    &.menu-md-img {
+      display: none;
+      position: unset;
+      margin: auto;
+      transform: translate(-25px);
+      width: 50px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    box-shadow: 0 8px 6px -6px #999;
+    max-width: unset;
+
+    .menu-bottom-img {
+      &.menu-md-img {
+        display: block;
+      }
+      &.menu-lg-img {
+        display: none;
+      }
+    }
+
+    .extra-icons-wrapper {
+      z-index: 11;
+      right: 1.5vw;
+      width: 20%;
+    }
+  }
+}
+ion-header,
+ion-toolbar {
+  height: $top-bar-height !important;
+}
+
+ion-menu,
+ion-header {
+  ion-thumbnail {
+    height: fit-content;
+    width: 110px;
+    padding: 5px;
+  }
+}
+
+.selected {
+  --ion-background-color: #c1c1c1;
+}

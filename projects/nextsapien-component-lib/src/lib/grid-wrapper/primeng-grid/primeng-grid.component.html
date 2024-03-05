@@ -1,0 +1,56 @@
+<ion-content style="height: 100vh">
+  <ion-grid class="container">
+    <ion-row class="ion-justify-content-around">
+      <ion-col size="12" size-sm="12" class="ion-no-padding">
+        <div class="control-panel">
+          <div class="button-panel">
+            <ion-button color="tertiary" type="button" [disabled]="loading$ | async" (click)="refresh()" [matTooltip]="('COMMON.REFRESH' | translate) + ' ' + title">
+              <mat-icon>refresh</mat-icon>
+              <span class="button-text">{{ 'COMMON.REFRESH' | translate }}</span>
+            </ion-button>
+            <ion-button color="primary" type="button" [disabled]="loading$ | async" (click)="add()" [matTooltip]="('COMMON.ADD_NEW' | translate) + ' ' + title" *ngIf="!disableAdd">
+              <mat-icon>add</mat-icon>
+              <span class="button-text">{{ 'COMMON.ADD' | translate }}</span>
+            </ion-button>
+            <ion-button
+              color="tertiary"
+              type="button"
+              [disabled]="loading$ | async"
+              (click)="toggleTrashItems()"
+              [matTooltip]="((showDeletedItems ? 'COMMON.HIDE_DELETED' : 'COMMON.SHOW_DELETED') | translate) + ' ' + title"
+              *ngIf="showTrashButton"
+              [ngClass]="{ 'show-deleted': showDeletedItems }"
+            >
+              <mat-icon>delete</mat-icon>
+              <span class="hide-show-button-text">{{ (showDeletedItems ? 'COMMON.HIDE_TRASH' : 'COMMON.SHOW_TRASH') | translate }}</span>
+            </ion-button>
+          </div>
+        </div>
+        <div class="control-panel ag-theme-custom-container">
+          <div class="ag-theme-custom-container-header">
+            <h2 class="gridTitle">{{ title }}</h2>
+          </div>
+          <lib-grid
+            [columns]="columnDefs"
+            [data]="data"
+            [rowsPerPage]="rowsPerPage"
+            [rowsPerPageOptions]="rowsPerPageOptions"
+            [sortField]="sortField"
+            [sortOrder]="sortOrder"
+            [isLoading]="isLoading"
+            [totalRecords]="totalRecords"
+            [paginatorDataTypeLabel]="'Things'"
+            [groupByField]="groupByField"
+            [filterDefinitions]="filterDefinitions"
+            [userFiltersList]="userFiltersList"
+            [currencyDisplayCode]="selectedCurrencyCode"
+            [dateFormat]="dateFormat"
+            (lazyLoad)="handleLazyLoad($event)"
+            (editComplete)="handleEditComplete($event)"
+            (editChange)="handleEditChange($event)"
+          ></lib-grid>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

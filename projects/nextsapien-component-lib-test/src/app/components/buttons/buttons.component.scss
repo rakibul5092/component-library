@@ -1,0 +1,13 @@
+div {
+  display: flex;
+  gap: 10px;
+}
+
+:host {
+  padding: 20px;
+}
+
+.button-container {
+  display: grid;
+  max-width: 300px;
+}

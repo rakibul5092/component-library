@@ -1,0 +1,47 @@
+.form-field {
+  &__select {
+    &-container {
+      display: flex;
+      border-radius: 2px;
+      border: 1px solid #dfe0e3;
+      border-radius: 2px;
+      background-color: white;
+
+      &--focus {
+        border: 1px solid #237fd5;
+      }
+
+      &--error {
+        border: 1px solid #d32f2f;
+      }
+
+      &--disabled {
+        background-color: #e3e8ea;
+        border: 1px solid #e3e8ea;
+
+        .mat-select-arrow {
+          color: #656a6b;
+        }
+
+        .mat-select-value-text {
+          color: #656a6b !important;
+        }
+      }
+    }
+
+    &-option--hidden {
+      display: none;
+    }
+
+    &-input {
+      width: 100%;
+    }
+  }
+}
+
+.separator {
+  width: 100%;
+  height: 1px;
+  background: #dfe0e3;
+  border-radius: 5%;
+}

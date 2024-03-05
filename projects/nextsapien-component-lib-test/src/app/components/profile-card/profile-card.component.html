@@ -1,0 +1,46 @@
+<div class="showcase-container centered-scrollable">
+  <table>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Data type</th>
+      <th>Required</th>
+      <th>Default</th>
+      <th>Demo</th>
+    </tr>
+    <tr>
+      <td>Profile</td>
+      <td>Profile card</td>
+      <td>Demo profile card without progress and notification</td>
+      <td [innerHTML]="dataType"></td>
+      <td>true</td>
+      <td></td>
+      <td class="last-td">
+        <lib-profile-card [profile]="profile1"></lib-profile-card>
+      </td>
+    </tr>
+    <tr>
+      <td>Profile</td>
+      <td>Profile card</td>
+      <td>Demo profile card with notification</td>
+      <td [innerHTML]="dataType"></td>
+      <td>true</td>
+      <td></td>
+      <td class="last-td">
+        <lib-profile-card [profile]="profile2"></lib-profile-card>
+      </td>
+    </tr>
+    <tr>
+      <td>Profile</td>
+      <td>Profile card</td>
+      <td>Demo profile card with progress and notification</td>
+      <td [innerHTML]="dataType"></td>
+      <td>true</td>
+      <td></td>
+      <td class="last-td">
+        <lib-profile-card [profile]="profileWithProgress"></lib-profile-card>
+      </td>
+    </tr>
+  </table>
+</div>

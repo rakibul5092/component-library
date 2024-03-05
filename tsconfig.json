@@ -1,0 +1,29 @@
+{
+  "compileOnSave": false,
+  "emitDecoratorMetadata": true,
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "downlevelIteration": true,
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2020",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2020",
+    "types": ["jest"],
+    "lib": ["es2020", "dom"],
+    "paths": {
+      "nextsapien-component-lib": ["dist/nextsapien-component-lib/nextsapien-component-lib", "dist/nextsapien-component-lib"],
+      "@ngx-translate/core": ["/node_modules/@ngx-translate/core/fesm2015/ngx-translate-core.mjs"],
+      "@ngx-translate/http-loader": ["/node_modules/@ngx-translate/http-loader/fesm2015/ngx-translate-http-loader.mjs"]
+    }
+  }
+}

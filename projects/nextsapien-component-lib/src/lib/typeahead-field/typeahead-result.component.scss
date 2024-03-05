@@ -1,0 +1,61 @@
+:host {
+  width: 100%;
+}
+
+.typeahead-result {
+  background-color: white;
+  border: 1px solid #dddddd;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 2px #eeeeee;
+  max-height: 280px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &__results {
+    max-height: 245px;
+    overflow-y: auto;
+  }
+
+  &__group-name {
+    padding: 5px 20px;
+    font-weight: bold;
+    background-color: #eff2f3;
+    border-top: 1px solid #dfe0e3;
+    border-bottom: 1px solid #dfe0e3;
+
+    &:first-of-type {
+      border-top: none;
+    }
+  }
+
+  &__no-results {
+    padding: 20px;
+    justify-content: center;
+    display: flex;
+    color: #24282a;
+  }
+
+  &__alternate-function {
+    padding: 10px;
+    color: #1350a4;
+    cursor: pointer;
+    border-top: 1px solid #dfe0e3;
+    font-size: 12px;
+
+    &:hover {
+      text-decoration: underline;
+      background-color: #eff2f3;
+    }
+  }
+
+  &__loading-section {
+    padding: 20px;
+    justify-content: center;
+    display: flex;
+  }
+
+  lib-info-card-list {
+    overflow: auto;
+  }
+}

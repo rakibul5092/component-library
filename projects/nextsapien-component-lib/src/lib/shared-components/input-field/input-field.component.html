@@ -1,0 +1,15 @@
+<div class="content-wrapper">
+  <input
+    [readonly]="readonly"
+    [class]="readonly ? 'input-field-readonly' : 'input-field'"
+    [type]="type"
+    [name]="label"
+    [value]="value"
+    (keyup)="change($event)"
+    (blur)="touched(true)"
+    [disabled]="disabled"
+    [placeholder]="placeholder"
+  />
+  <label *ngIf="label" class="input-label">{{ label }}</label>
+  <div class="error-outline"></div>
+</div>

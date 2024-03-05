@@ -1,0 +1,9 @@
+<button class="icon-button" mat-icon-button [mat-menu-trigger-for]="menu">
+  <mat-icon>language</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button (click)="setLanguage(language)" mat-menu-item *ngFor="let language of getKeys()" [ngClass]="{ 'highlighted-language': language === selectedLanguage }">
+    <mat-icon>flag</mat-icon>
+    <span>{{ language }}</span>
+  </button>
+</mat-menu>

@@ -1,0 +1,65 @@
+.gridTitle {
+  padding: 20px 20px 0 20px;
+}
+
+.ag-theme-custom-container {
+  background: #fff;
+  border: 1px solid var(--ag-border-color, #bdc3c7);
+}
+
+.ag-theme-custom-container-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--ag-border-color, #bdc3c7);
+}
+
+.button-panel {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin: 70px 0 10px;
+  background: #fff;
+  padding: 10px;
+  border: 1px solid var(--ag-border-color, #bdc3c7);
+}
+
+.noRowsTemplate {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+@media only screen and (max-width: 768px) {
+  mat-form-field {
+    width: 48px !important;
+  }
+}
+
+@media screen and (max-width: 610px) {
+  .button-panel {
+    ion-button {
+      .button-text {
+        display: none;
+      }
+    }
+  }
+
+  .control-panel {
+    max-width: 90%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .button-panel {
+    ion-button {
+      .hide-show-button-text {
+        display: none;
+      }
+
+      &.show-deleted {
+        --ion-color-base: green !important;
+      }
+    }
+  }
+}

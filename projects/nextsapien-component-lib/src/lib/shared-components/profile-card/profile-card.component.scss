@@ -1,0 +1,111 @@
+:host {
+  --background: #27242c;
+  --box-shadow: 11px 10px 27px 2.5px rgba(17, 16, 20, 0.65), -5px -5px 16px -3px rgba(203, 199, 209, 0.25);
+  --border-radius: 8px;
+  --height: 199px;
+  --width: 144px;
+  --notification-background: linear-gradient(94.44deg, #fe3c72 1.26%, #e15561 100%);
+  --notification-width: 35.96px;
+  --notification-height: 35.96px;
+  --notification-border: 1px solid rgba(255, 255, 255, 0.4);
+  --progress-bar-background: linear-gradient(94.44deg, #863b48 1.26%, #863b48 100%);
+  --progress-color: linear-gradient(94.44deg, #fe3c72 1.26%, #e15561 100%);
+  --progress-blur-color: linear-gradient(94.44deg, #fe3c72 1.26%, #e15561 100%);
+}
+
+.personal-card {
+  position: relative;
+  display: block;
+  margin: 5px auto;
+  background: var(--background);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+  max-width: var(--width);
+  min-width: var(--width);
+  height: var(--height);
+  cursor: pointer;
+
+  .wihtout-progress {
+    max-width: var(--width);
+    max-height: var(--height);
+    padding: 13px 12px 10px 12px;
+
+    .badge-container {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .noti {
+        background: var(--notification-background);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+
+        &-container {
+          position: absolute;
+          height: var(--notification-width);
+          width: var(--notification-height);
+          top: -5px;
+          right: -5px;
+          filter: blur(5.2641px);
+        }
+
+        &-circle {
+          height: calc(var(--notification-height) - 8.99px);
+          width: calc(var(--notification-width) - 8.99px);
+          z-index: 999;
+          border: var(--notification-border);
+          box-sizing: border-box;
+        }
+      }
+
+      span {
+        position: absolute;
+        z-index: 999;
+      }
+    }
+
+    img {
+      border-radius: 8px;
+      width: 120px;
+      height: 127px;
+      margin-bottom: 5px;
+    }
+  }
+
+  .progress-bar-container {
+    position: relative;
+    margin-top: -6px;
+  }
+
+  .progress-label {
+    position: absolute;
+    top: 13%;
+    left: 30%;
+  }
+}
+
+ion-progress-bar {
+  border-radius: 18px;
+  height: 16px;
+  --background: var(--progress-bar-background);
+  --progress-background: var(--progress-color);
+}
+
+ion-progress-bar::part(progress) {
+  border-radius: 18px;
+}
+
+.progress-blur {
+  transform: none;
+  height: 16px;
+  position: absolute;
+  background: var(--progress-blur-color);
+  filter: blur(6px);
+  top: 0px;
+  left: 0px;
+}

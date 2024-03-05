@@ -1,0 +1,93 @@
+<div
+  class="form-field__select-container"
+  [ngClass]="{
+    'form-field__select-container--focus': focused,
+    'form-field__select-container--error': submitted && formFieldControl.errors,
+    'form-field__select-container--disabled': formFieldControl.disabled
+  }"
+>
+  <div class="form-field__select-input">
+    <mat-form-field>
+      <mat-select
+        *ngIf="multiple"
+        matNativeControl
+        [formControl]="formFieldControl"
+        [placeholder]="placeholder"
+        [disableOptionCentering]="true"
+        [panelClass]="{ 'form-field-select-panel-class': !required, 'form-field-select-panel-class--required': required }"
+        [multiple]="true"
+        (focus)="handleFocus()"
+        (focusout)="handleFocusOut()"
+        #select="matSelect"
+      >
+        <mat-select-trigger>
+          <span *ngIf="multiple; else singleSingleSelectTrigger">
+            <span *ngFor="let option of formFieldControl.value; let i = index">
+              {{ option.label }}
+              <span *ngIf="i !== formFieldControl.value?.length - 1">
+                {{ operator }}
+              </span>
+            </span>
+          </span>
+          <ng-template #singleSingleSelectTrigger>
+            {{ formFieldControl.value?.label }}
+          </ng-template>
+        </mat-select-trigger>
+        <ng-container *ngIf="options?.length > thresholdOptionValue || backendQueryUrl">
+          <lib-search-bar [placeholderText]="'Search'" (searchStringChange)="filterChange($event)"> </lib-search-bar>
+          <div class="separator"></div>
+        </ng-container>
+        <mat-option *ngIf="options?.length <= thresholdOptionValue && !multiple && showSelectMessage" disabled="true" class="form-field__select-option"> Select One </mat-option>
+        <ng-container *ngFor="let option of filteredOptions">
+          <mat-option *ngIf="option.value" class="form-field__select-option" [disabled]="option.disabled" [cosTooltip]="option.label" [value]="option">
+            {{ option.label }}
+          </mat-option>
+          <div *ngIf="option.separator" class="separator"></div>
+        </ng-container>
+        <ng-container *ngIf="!filteredOptions || filteredOptions.length < 1 || (filteredOptions.length === 1 && !filteredOptions[0].value)">
+          <mat-option class="form-field__select-option--hidden"></mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-select
+        *ngIf="!multiple"
+        matNativeControl
+        [formControl]="formFieldControl"
+        [placeholder]="placeholder"
+        [disableOptionCentering]="true"
+        [panelClass]="{ 'form-field-select-panel-class': !required, 'form-field-select-panel-class--required': required }"
+        [multiple]="false"
+        (focus)="handleFocus()"
+        (focusout)="handleFocusOut()"
+        #select="matSelect"
+      >
+        <mat-select-trigger>
+          <span *ngIf="multiple; else singleSingleSelectTrigger">
+            <span *ngFor="let option of formFieldControl.value; let i = index">
+              {{ option.label }}
+              <span *ngIf="i !== formFieldControl.value?.length - 1">
+                {{ operator }}
+              </span>
+            </span>
+          </span>
+          <ng-template #singleSingleSelectTrigger>
+            {{ formFieldControl.value?.label }}
+          </ng-template>
+        </mat-select-trigger>
+        <ng-container *ngIf="options?.length > thresholdOptionValue || backendQueryUrl">
+          <lib-search-bar [placeholderText]="'Search'" (searchStringChange)="filterChange($event)"> </lib-search-bar>
+          <div class="separator"></div>
+        </ng-container>
+        <mat-option *ngIf="options?.length <= thresholdOptionValue && !multiple && showSelectMessage" disabled="true" class="form-field__select-option"> Select One </mat-option>
+        <ng-container *ngFor="let option of filteredOptions">
+          <mat-option *ngIf="option.value" class="form-field__select-option" [disabled]="option.disabled" [cosTooltip]="option.label" [value]="option">
+            {{ option.label }}
+          </mat-option>
+          <div *ngIf="option.separator" class="separator"></div>
+        </ng-container>
+        <ng-container *ngIf="!filteredOptions || filteredOptions.length < 1 || (filteredOptions.length === 1 && !filteredOptions[0].value)">
+          <mat-option class="form-field__select-option--hidden"></mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

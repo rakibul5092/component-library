@@ -1,0 +1,152 @@
+.chip_list {
+  padding: 4px;
+
+  &-wrapper {
+    background: #ffffff;
+    border: 2px solid #dfe0e3;
+    border-radius: 2px;
+    display: flex;
+    width: 100%;
+    min-height: 38px;
+    font-size: 13px;
+
+    &-text {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      max-width: 150px;
+      max-height: 40px;
+      padding: 5px 9px;
+      border-right: solid 2px #dadfe2;
+
+      &--prefix {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      &--sufix {
+        align-items: center;
+        cursor: pointer;
+        color: #1350a4;
+        display: flex;
+        font-weight: 500;
+        margin-left: auto;
+        margin-right: 10px;
+        max-height: 40px;
+        padding-left: 10px;
+      }
+
+      &--disabled,
+      &--info {
+        display: flex;
+        color: #8f9395;
+        font-weight: 500;
+        pointer-events: none;
+        margin: auto;
+      }
+
+      &--info {
+        margin-left: 0px;
+        padding-left: 12px;
+      }
+    }
+  }
+
+  &-item {
+    background-color: #e3e8ea;
+    border-radius: 2px !important;
+    cursor: pointer;
+    font-size: 13px;
+    max-width: 150px;
+
+    &-text {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    &-button {
+      margin-top: 5px;
+      margin-left: 5px !important;
+    }
+  }
+
+  &-menu {
+    &-wrapper {
+      align-items: center;
+      background-color: #10365a;
+      border: solid 1px #dadfe2;
+      border-left: 0;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      max-height: 40px;
+
+      &__text {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        border-left: 2px solid #fff;
+        margin-left: 10px;
+        padding: 10px;
+
+        &--icon {
+          margin-top: 2px;
+        }
+
+        &:first-child {
+          border-left: 0;
+          margin-left: 0;
+        }
+      }
+
+      .icon-filter {
+        margin-right: 5px;
+        position: relative;
+        margin: 0px 14px 0 10px;
+
+        &:before {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+
+    &-item {
+      height: 40px;
+      line-height: 40px;
+      display: flex;
+      justify-content: space-between;
+
+      .icon {
+        display: none;
+        margin-top: 2px;
+        color: #10365a;
+      }
+
+      &--heading {
+        height: 38px;
+        line-height: 42px;
+        color: #656a6b;
+        pointer-events: none;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+
+      &--saved {
+        font-weight: 600;
+
+        .icon {
+          display: block;
+        }
+      }
+
+      &--disabled {
+        cursor: not-allowed;
+      }
+    }
+  }
+}

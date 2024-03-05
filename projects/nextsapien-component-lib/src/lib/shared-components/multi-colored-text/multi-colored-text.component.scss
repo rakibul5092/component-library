@@ -1,0 +1,12 @@
+:host {
+  --highlight-color: var(--text-highlight-color);
+  --text-color: var(--ion-text-color);
+}
+:host ::ng-deep {
+  .multi-colored {
+    color: var(--text-color);
+    > span {
+      color: var(--highlight-color);
+    }
+  }
+}

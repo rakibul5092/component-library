@@ -1,0 +1,96 @@
+.overview-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 25px;
+  gap: 25px;
+
+  ion-label,
+  ion-input {
+    font-family: var(--ion-secondary-font-family);
+  }
+
+  .heading-label {
+    font-size: 20px;
+  }
+
+  .btn-next {
+    margin-top: 15px;
+    width: 20%;
+    min-width: auto;
+  }
+
+  .remove-button {
+    color: #fff;
+    height: 45px;
+    background-color: #ff0000;
+    min-width: auto;
+    border: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+}
+
+.personal-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: fit-content;
+  overflow: hidden;
+  min-width: calc(25% - calc(25px * 3 / 4));
+
+  app-image {
+    display: block;
+    width: 100%;
+  }
+
+  .remove-button {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    padding: 0;
+    top: -100%;
+    right: 5%;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+}
+
+@media screen and (max-width: 1215px) {
+  .personal-link {
+    min-width: calc(33.33% - calc(25px * 2 / 3));
+  }
+}
+
+@media screen and (max-width: 932px) {
+  .personal-link {
+    min-width: calc(50% - calc(25px / 2));
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .overview-container {
+    gap: 0;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .personal-link {
+    min-width: auto;
+    margin-bottom: 25px;
+  }
+
+  .personal-link:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .personal-link {
+    min-width: 100%;
+  }
+}

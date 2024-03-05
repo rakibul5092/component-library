@@ -1,0 +1,13 @@
+<div class="editor-wrapper">
+  <div class="editor-wrapper__header" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <div class="editor-wrapper__header-title">{{ title }}</div>
+    <div class="editor-wrapper__header-close-btn" (click)="close()">
+      <i class="icon icon-close"></i>
+    </div>
+  </div>
+  <editor [apiKey]="apiKey" [formControl]="formFieldControl" [init]="initConfig"> </editor>
+  <div class="editor-wrapper__footer">
+    <button class="editor-wrapper__footer-cancel-btn" (click)="close()">Cancel</button>
+    <button class="editor-wrapper__footer-save-btn" (click)="save()">Save</button>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="personal-card ion-activatable" *ngIf="profile">
+  <div class="wihtout-progress">
+    <div *ngIf="profile.notification > 0" class="badge-container">
+      <div class="noti noti-container"></div>
+      <div class="noti noti-circle"></div>
+      <span class="f-lato f-w-400 f-sm h-160 f-white">{{ profile.notification }}</span>
+    </div>
+
+    <img [src]="profile.photo" alt="use" />
+    <div class="f-lato f-w-600 f-md h-160 f-white">{{ profile.name }}</div>
+    <span class="f-lato f-w-400 f-sm h-160 f-gray">{{ profile.value }}</span>
+  </div>
+  <div *ngIf="profile.progress" class="progress-bar-container">
+    <ion-progress-bar #progressBar mode="ios" [value]="profile.progress"></ion-progress-bar>
+    <div [id]="'progressBlur' + profile.id" class="progress-blur"></div>
+    <ion-text class="progress-label f-lato f-w-400 f-xs h-100 f-white">
+      {{ profile.progress * 100 + '% ' + progressText }}
+    </ion-text>
+  </div>
+  <ion-ripple-effect type="bounded"></ion-ripple-effect>
+</div>

@@ -1,0 +1,22 @@
+<div class="typeahead-result">
+  <div *ngIf="!groups.length && loading" class="typeahead-result__loading-section">
+    <mat-progress-spinner [diameter]="50" [strokeWidth]="5" [mode]="'indeterminate'" class="typeahead-result__progress"></mat-progress-spinner>
+  </div>
+  <div class="typeahead-result__results">
+    <div class="typeahead-result__group-section" *ngFor="let group of groups">
+      <div *ngIf="group.groupName" class="typeahead-result__group-name">{{ group.groupName }}</div>
+      <!-- <lib-info-card-list
+        *ngIf="group.summaries.length"
+        [itemList]="group.summaries"
+        [filterable]="false"
+        [selectable]="true"
+        [maxCount]="50"
+        (itemSelected)="itemSelected($event)"
+      ></lib-info-card-list> -->
+    </div>
+    <div *ngIf="!groups.length && !loading" class="typeahead-result__no-results">No results found</div>
+  </div>
+  <div *ngIf="alternateText" class="typeahead-result__alternate-function" (click)="handleAlternateFunction()">
+    {{ alternateText }}
+  </div>
+</div>

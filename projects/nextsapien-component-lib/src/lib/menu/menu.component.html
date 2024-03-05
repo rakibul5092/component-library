@@ -1,0 +1,34 @@
+<ion-menu side="start" contentId="{{ contentId }}">
+  <ion-content>
+    <ion-list>
+      <ion-menu-toggle auto-hide="true">
+        <ion-item lines="none" routerLink="/" class="logo-wrapper">
+          <img [src]="logo" alt="" />
+        </ion-item>
+      </ion-menu-toggle>
+      <ng-container *ngFor="let item of menuItems; index as i">
+        <ion-menu-toggle auto-hide="true">
+          <ion-item (click)="activeIndex = i" lines="none" routerLink="{{ item.link }}" [class.selected]="activeIndex === i">
+            <ion-label>{{ item.name }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ng-container>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-header class="ion-no-border" *ngIf="isDefault; else customContent">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-thumbnail class="menu-bottom-img menu-md-img">
+      <img [src]="logo" routerLink="/" class="" />
+    </ion-thumbnail>
+  </ion-toolbar>
+  <img [src]="logo" class="menu-bottom-img menu-lg-img" routerLink="/" />
+</ion-header>
+
+<ng-template #customContent>
+  <ng-content></ng-content>
+</ng-template>

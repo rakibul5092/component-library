@@ -1,0 +1,39 @@
+ion-segment {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  :host(.segment-button-checked) {
+    border-radius: 50px !important;
+  }
+
+  ion-segment-button {
+    --indicator-color: linear-gradient(94.44deg, #fe3c72 1.26%, #e15561 100%);
+    --indicator-height: 5px;
+
+    .text {
+      line-height: 160%;
+      text-transform: capitalize;
+    }
+  }
+
+  ion-segment-button::part(indicator) {
+    display: flex;
+    justify-content: center;
+  }
+
+  ion-segment-button::part(indicator-background) {
+    border-radius: 50px !important;
+    width: 100%;
+  }
+}
+
+ion-segment::-webkit-scrollbar {
+  display: none;
+}
+
+.ion-segment {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}

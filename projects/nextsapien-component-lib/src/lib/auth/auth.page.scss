@@ -1,0 +1,30 @@
+::ng-deep {
+  ion-grid.container.auth-grid {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+
+    & > ion-row {
+      justify-content: center;
+      align-items: center;
+    }
+
+    mat-card {
+      margin: 2em auto;
+      text-align: center;
+    }
+    mat-form-field {
+      display: block !important;
+    }
+    .error {
+      border: none !important;
+      color: red;
+      text-align: left;
+    }
+    .valid {
+      border: none;
+      color: green;
+      text-align: left;
+    }
+  }
+}
